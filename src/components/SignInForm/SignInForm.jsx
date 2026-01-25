@@ -10,7 +10,7 @@ const SignInForm = () => {
   const { setUser } = useContext(UserContext);
   const [message, setMessage] = useState('');
   const [formData, setFormData] = useState({
-    username: '',
+    name: '',
     password: '',
   });
 
@@ -36,13 +36,13 @@ const SignInForm = () => {
       <p>{message}</p>
       <form autoComplete='off' onSubmit={handleSubmit}>
         <div>
-          <label htmlFor='email'>Username:</label>
+          <label htmlFor='name'>Name:</label>
           <input
             type='text'
             autoComplete='off'
-            id='username'
-            value={formData.username}
-            name='username'
+            id='name'
+            value={formData.name}
+            name='name'
             onChange={handleChange}
             required
           />
