@@ -15,7 +15,7 @@ const Dashboard = () => {
   // This is where we perform side effects like API calls
   return (
     <main>
-      <h1>Welcome, {user.username}</h1>
+      <h1>Welcome, {user.name}</h1>
       <p>
         This is the dashboard page where you can test your authentication.
       </p>
