@@ -48,7 +48,8 @@ const ClassDetail = () => {
 
             {true && (
                 <>
-                    <Link to={`/classes/${id}/edit`}>Edit</Link>
+                    <Link to={`/classes/${id}/edit`}>Edit</Link><br />
+                    <Link to={`/classes/${id}/add-student`}>Add Student</Link>
                     <br />
                     <button onClick={handleDelete}>Delete</button>
                 </>

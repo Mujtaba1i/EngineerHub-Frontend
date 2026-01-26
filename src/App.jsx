@@ -16,6 +16,7 @@ import ClassList from './components/Class/ClassList.jsx';
 // Class-Student component ===============================================
 import AddStudent from './components/Class-Student/AddStudent.jsx';
 import EnrolledStudents from './components/Class-Student/EnrolledStudents.jsx';
+import ClassDashboard from './components/Class-Student/ClassDashboard.jsx';
 
 
 import { UserContext } from './contexts/UserContext';
@@ -37,8 +38,9 @@ const App = () => {
         <Route path="/classes/new" element={<CreateClass />} />
         <Route path="/classes/:id/edit" element={<UpdatClass />} />
         <Route path="/classes/:id" element={<ClassDetail />} />
-        <Route path="/classes/:classId/add-student" element={<AddStudent />}/>
-        <Route path="/classes/:classId/enrolled-student" element={<EnrolledStudents />}/>
+        <Route path="/classes/:id/add-student" element={<AddStudent />}/>
+        <Route path="/classes/:id/enrolled-student" element={<EnrolledStudents />}/>
+        <Route path="/student-class/:id" element={<ClassDashboard />}/>
 
 
       
