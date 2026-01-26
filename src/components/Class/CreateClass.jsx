@@ -1,28 +1,15 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import * as classService from '../../services/classService'
 
-const ClassForm = ({ classToUpdate, addClass, updateClass }) => {
+const CreateClass = () => {
   const navigate = useNavigate()
-
-  const [formState, setFormState] = useState(
-    classToUpdate ? classToUpdate : { name: '' }
-  )
-
+  const[formState,setFormState] = useState('')
   const handleSubmit = async (e) => {
     e.preventDefault()
-
-    if (classToUpdate) {
-      const updated = await classService.update(classToUpdate.id, {
-        name: formState.name
-      })
-      updateClass(updated)
-    } else {
       const created = await classService.create({
         name: formState.name
       })
-      addClass(created)
-    }
 
     navigate('/classes')
   }
@@ -39,9 +26,9 @@ const ClassForm = ({ classToUpdate, addClass, updateClass }) => {
         value={formState.name}
         onChange={handleChange}
       />
-      <button type="submit">Save</button>
+      <button type="submit">Create</button>
     </form>
   )
 }
 
-export default ClassForm
+export default CreateClass
