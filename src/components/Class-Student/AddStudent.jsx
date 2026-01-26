@@ -1,9 +1,10 @@
-import { useState, useContext } from "react";
+import { useState, useContext, use } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { addStudentToClass } from "../../services/studentClassService";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
-const AddStudent = ({ classId, doctorId, refresh }) => {
+const AddStudent = () => {
+  const {id} = useParams()
   const { user } = useContext(UserContext);
   const [studentId, setStudentId] = useState("");
   const navigate = useNavigate()
@@ -11,18 +12,20 @@ const AddStudent = ({ classId, doctorId, refresh }) => {
   const isOwnerDoctor =
     user?.role === "DOCTOR" && user.id === doctorId;
 
-  if (!isOwnerDoctor) navigate('/');
+  // if (!isOwnerDoctor) navigate('/');
+
+  function handleChange(event){
+    setStudentId(event.target.value) 
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    
     await addStudentToClass({
       student_id: Number(studentId),
-      class_id: classId,
+      class_id: Number(id),
     });
-
-    setStudentId("");
-    refresh();
+    navigate(`/classes/${id}`)
   };
 
   return (
@@ -31,7 +34,7 @@ const AddStudent = ({ classId, doctorId, refresh }) => {
         type="number"
         placeholder="Student ID"
         value={studentId}
-        onChange={(e) => setStudentId(e.target.value)}
+        onChange={handleChange}
       />
       <button type="submit">Add Student</button>
     </form>

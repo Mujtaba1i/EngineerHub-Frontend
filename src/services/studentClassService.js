@@ -3,9 +3,14 @@ import axios from 'axios'
 
 export const addStudentToClass = async (data) => {
     try {
-        const response = await axios.post(BASE_URL, data);
+        const token = localStorage.getItem('token')
+        const response = await axios.post(BASE_URL, data, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
         console.log(response)
-        //   return response.data.
+        return response.data
     }
     catch (err) { console.log(err) }
 };
