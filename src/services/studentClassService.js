@@ -9,7 +9,6 @@ export const addStudentToClass = async (data) => {
                 Authorization: `Bearer ${token}`
             }
         });
-        console.log(response)
         return response.data
     }
     catch (err) { console.log(err) }

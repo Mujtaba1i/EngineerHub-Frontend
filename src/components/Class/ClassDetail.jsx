@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { useParams, useNavigate, Link } from 'react-router'
 import * as classService from '../../services/classService'
+import * as studentClassService from '../../services/studentClassService'
 import { UserContext } from '../../contexts/UserContext';
 
 const ClassDetail = () => {
@@ -17,13 +18,18 @@ const ClassDetail = () => {
 
     useEffect(() => {
         getClass()
-    }, [id])
+    }, [])
 
     
 
     const handleDelete = async () => {
         await classService.remove(id)
         navigate('/classes')
+    }
+
+    async function handleStudentDelete(student_id){
+        const res = await studentClassService.removeStudentFromClass(id,student_id)
+        getClass()
     }
 
     if (!cls) return <h1>Loading...</h1>
@@ -42,7 +48,9 @@ const ClassDetail = () => {
             <h3>Students</h3>
             <ul>
                 {cls.enrollments.map(en => (
-                    <li key={en.id}>{en.student?.name}</li>
+                    <li key={en.id}>{en.student?.name}
+                    <button onClick={()=>{handleStudentDelete(en.student.id)}}>Remove</button>
+                    </li>
                 ))}
             </ul>
 
