@@ -1,8 +1,9 @@
 import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { removeStudentFromClass } from "../../services/studentClassService";
+import * as classSerive from '../../services/classService'
 
-const EnrolledStudents = ({ classData, refresh }) => {
+const EnrolledStudents = () => {
   const { user } = useContext(UserContext);
 
   const isOwnerDoctor =
