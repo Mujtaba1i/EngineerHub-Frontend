@@ -13,6 +13,11 @@ import CreateClass from './components/Class/CreateClass.jsx';
 import UpdatClass from './components/Class/UpdateClass.jsx';
 import ClassList from './components/Class/ClassList.jsx';
 
+// Class-Student component ===============================================
+import AddStudent from './components/Class-Student/AddStudent.jsx';
+import EnrolledStudents from './components/Class-Student/EnrolledStudents.jsx';
+
+
 import { UserContext } from './contexts/UserContext';
 
 const App = () => {
@@ -32,7 +37,11 @@ const App = () => {
         <Route path="/classes/new" element={<CreateClass />} />
         <Route path="/classes/:id/edit" element={<UpdatClass />} />
         <Route path="/classes/:id" element={<ClassDetail />} />
+        <Route path="/classes/:classId/add-student" element={<AddStudent />}/>
+        <Route path="/classes/:classId/enrolled-student" element={<EnrolledStudents />}/>
 
+
+      
       </Routes>
     </>
   );
