@@ -11,7 +11,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import ClassDetail from './components/Class/ClassDetail';
 import CreateClass from './components/Class/CreateClass.jsx';
 import UpdatClass from './components/Class/UpdateClass.jsx';
-import ClassList from './components/class/classList.jsx';
+import ClassList from './components/Class/ClassList.jsx';
 
 // Class-Student component ===============================================
 import AddStudent from './components/Class-Student/AddStudent.jsx';
