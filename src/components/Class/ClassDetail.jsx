@@ -1,30 +1,36 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useParams, useNavigate, Link } from 'react-router'
 import * as classService from '../../services/classService'
+import { UserContext } from '../../contexts/UserContext';
 
-const ClassDetail = ({ deleteClass, currentUser }) => {
+const ClassDetail = () => {
+    const { user } = useContext(UserContext);
     const [cls, setCls] = useState(null)
     const { id } = useParams()
     const navigate = useNavigate()
 
+
+    const getClass = async () => {
+        const data = await classService.getOne(id)
+        setCls(data)
+    }
+
     useEffect(() => {
-        const getClass = async () => {
-            const data = await classService.getOne(id)
-            setCls(data)
-        }
         getClass()
     }, [id])
 
+    
+
     const handleDelete = async () => {
         await classService.remove(id)
-        deleteClass(id)
         navigate('/classes')
     }
 
     if (!cls) return <h1>Loading...</h1>
+    const isDoctorOwner = cls.doctor_id === user.sub
 
-    if (!(currentUser?.role === 'doctor' &&
-        currentUser?.id === cls.doctor_id)) {
+    if (!(user?.role === 'doctor' && parseInt(user?.sub) === cls.doctor_id)) 
+        {
         navigate('/')
     }
     
@@ -40,7 +46,7 @@ const ClassDetail = ({ deleteClass, currentUser }) => {
                 ))}
             </ul>
 
-            {isDoctorOwner && (
+            {true && (
                 <>
                     <Link to={`/classes/${id}/edit`}>Edit</Link>
                     <br />

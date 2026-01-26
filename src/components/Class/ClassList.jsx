@@ -12,7 +12,6 @@ const ClassList = () => {
   }
 
   useEffect(()=>{getClss()},[])
-  console.log(classes)
   
 
   return (

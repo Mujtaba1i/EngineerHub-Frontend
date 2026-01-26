@@ -16,10 +16,9 @@ useEffect(()=>{getdata()},[])
   
   
 
- console.log(formState)
   const handleSubmit = async (e) => {
     e.preventDefault()
-      const updated = await classService.update({
+      const updated = await classService.update(id,{
         name: formState.name
       })
 
