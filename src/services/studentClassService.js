@@ -17,7 +17,14 @@ export const addStudentToClass = async (data) => {
 
 export const removeStudentFromClass = async (classId, studentId) => {
     try {
-        const response = await axios.delete(`${BASE_URL}/${classId}/${studentId}`);
+        const token = localStorage.getItem('token')
+        const response = await axios.delete(`${BASE_URL}/${classId}/${studentId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+        return response.data
     }
     catch (err) { console.log(err) }
 };

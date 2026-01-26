@@ -1,28 +1,42 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import * as classSerive from '../../services/classService'
-import { useParams } from "react-router";
+import { useNavigate, useParams, Navigate } from "react-router";
+import { removeStudentFromClass } from '../../services/studentClassService'
 
 function ClassDashboard() {
-    const { user } = useContext(UserContext);
-    const{id} = useParams()
+  const { user } = useContext(UserContext);
+  const { id } = useParams()
+  const navigate = useNavigate()
+  
+  const [classData, setClassData] = useState('')
+  const [students, setStudents] = useState('')
+  const [doctor, setDoctor] = useState('')
 
-    const [classData, setClassData]= useState('')
-    const [students, setStudents]= useState('')
-    const [doctor, setDoctor]= useState('')
+  async function getClassData() {
+    const response = await classSerive.getOne(id)
+    setDoctor(response.doctor)
+    setStudents(response.enrollments)
+    setClassData(response)
 
-    async function getClassData(){
-        const response = await classSerive.getOne(id)
-        setDoctor(response.doctor)
-        setStudents(response.enrollments)
-        setClassData(response)
-    }
-    useEffect(() => {
-        getClassData()
-    }, [])
+  }
 
 
-return (
+  useEffect(() => {
+    getClassData()
+  }, [])
+
+
+const handleLeave = async () => {
+  const res = await removeStudentFromClass(id, Number(user.sub));
+  navigate('/')
+
+};
+
+
+
+
+  return (
     <div>
       <h2>{classData.name}</h2>
 
@@ -31,7 +45,7 @@ return (
       </p>
 
       <h3>students:</h3>
-              {!students.length ? (
+      {!students.length ? (
         <p>No students enrolled</p>
       ) : (
         <ul>
@@ -41,7 +55,12 @@ return (
             </li>
           ))}
         </ul>
-      )}    
+      )}
+      {(user?.role === "student" || user.role === 'graduate' ) && (
+        <button onClick={handleLeave}>
+          Leave Class
+        </button>
+      )}
 
     </div>
   );

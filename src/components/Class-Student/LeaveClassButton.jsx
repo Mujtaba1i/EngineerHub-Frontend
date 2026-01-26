@@ -9,10 +9,7 @@ const LeaveClassButton = ({ classId, refresh }) => {
 
   if (user?.role !== "STUDENT") navigate('/');
 
-  const handleLeave = async () => {
-    await removeStudentFromClass(classId, user.id);
-    refresh();
-  };
+  
 
   return <button onClick={handleLeave}>Leave Class</button>;
 };
