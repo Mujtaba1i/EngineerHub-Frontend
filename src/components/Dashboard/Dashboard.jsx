@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from 'react';
 
 import { UserContext } from '../../contexts/UserContext';
+import { Link } from 'react-router';
 
 
 const Dashboard = () => {
@@ -19,7 +20,12 @@ const Dashboard = () => {
       <p>
         This is the dashboard page where you can test your authentication.
       </p>
-      <p><strong>{message}</strong></p>
+
+      <ul>
+        <li><Link to='/classes'>Classes</Link></li>
+        <li><Link to='/classes/new'>Create a new class</Link></li>
+      </ul>
+
     </main>
   );
 };
