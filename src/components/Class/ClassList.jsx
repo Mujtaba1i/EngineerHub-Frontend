@@ -1,10 +1,12 @@
 import { Link } from 'react-router';
 import * as classService from '../../services/classService';
-import { useEffect, useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { UserContext } from '../../contexts/UserContext';
 import styles from './ClassList.module.css';
 
 const ClassList = () => {
   const [classes, setClasses] = useState([]);
+  const { user } = useContext(UserContext);
 
   async function getClss() {
     const allClasses = await classService.getAll();
@@ -14,18 +16,22 @@ const ClassList = () => {
   useEffect(() => {
     getClss();
   }, []);
-  
+
+  const doctorClasses = classes.filter(
+    cls => cls.doctor_id === Number(user.sub)
+  );
+
   return (
     <main className={styles.classListContainer}>
-      <h1>All Classes</h1>
+      <h1>My Classes</h1>
 
-      {!classes.length ? (
+      {!doctorClasses.length ? (
         <div className={styles.emptyState}>
           No classes found
         </div>
       ) : (
         <ul className={styles.classList}>
-          {classes.map(cls => (
+          {doctorClasses.map(cls => (
             <li key={cls.id} className={styles.classItem}>
               <Link to={`/classes/${cls.id}`}>
                 {cls.name}
