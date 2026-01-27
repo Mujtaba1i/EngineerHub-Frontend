@@ -7,15 +7,21 @@ import SignInForm from './components/SignInForm/SignInForm';
 import Landing from './components/Landing/Landing';
 import Dashboard from './components/Dashboard/Dashboard';
 
-//Class components =========================================================
+// Class components =========================================================
 import ClassDetail from './components/Class/ClassDetail';
 import CreateClass from './components/Class/CreateClass.jsx';
 import UpdatClass from './components/Class/UpdateClass.jsx';
 import ClassList from './components/Class/ClassList.jsx';
 
-// Class-Student component ===============================================
+// Class-Student component =================================================
 import AddStudent from './components/Class-Student/AddStudent.jsx';
 import ClassDashboard from './components/Class-Student/ClassDashboard.jsx';
+
+// Project component ========================================================
+import ProjectsList from './components/Projects/ProjectsList.jsx';
+import ProjectDetails from './components/Projects/ProjectDetails.jsx';
+import AddProject from './components/Projects/AddProject.jsx';
+import EditProject from './components/Projects/EditProject.jsx';
 
 import { UserContext } from './contexts/UserContext';
 import styles from './App.module.css';
@@ -38,11 +44,16 @@ const App = () => {
           <Route path="/classes/new" element={<CreateClass />} />
           <Route path="/classes/:id/edit" element={<UpdatClass />} />
           <Route path="/classes/:id" element={<ClassDetail />} />
-          <Route path="/classes/:id/add-student" element={<AddStudent />}/>
-          <Route path="/student-class/:id" element={<ClassDashboard />}/>
+          <Route path="/classes/:id/add-student" element={<AddStudent />} />
+          <Route path="/student-class/:id" element={<ClassDashboard />} />
+          <Route path="/projects" element={<ProjectsList />} />
+          <Route path="/projects/:id" element={<ProjectDetails currentUser={user} />} />
+          <Route path="/projects/add" element={<AddProject />} />
+          <Route path="/projects/edit/:id" element={<EditProject />} />
+
         </Routes>
       </main>
-      
+
       <footer className={styles.footer}>
         <div className={styles.footerLeft}>
           Made by Eng.Pengu
