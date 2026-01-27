@@ -2,9 +2,9 @@ import { Link } from 'react-router';
 import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
 import * as postService from '../../services/postService';
-import styles from './PostListPage.module.css';
+import styles from './PostList.module.css';
 
-const PostListPage = () => {
+const PostList = () => {
   const [posts, setPosts] = useState([]);
   const { user } = useContext(UserContext);
 
@@ -46,4 +46,4 @@ const PostListPage = () => {
   );
 };
 
-export default PostListPage;
+export default PostList;
