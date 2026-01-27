@@ -17,8 +17,8 @@ import ClassList from './components/Class/ClassList.jsx';
 import AddStudent from './components/Class-Student/AddStudent.jsx';
 import ClassDashboard from './components/Class-Student/ClassDashboard.jsx';
 
-
 import { UserContext } from './contexts/UserContext';
+import styles from './App.module.css';
 
 const App = () => {
   // Access the user object from UserContext
@@ -26,24 +26,35 @@ const App = () => {
   const { user } = useContext(UserContext);
 
   return (
-    <>
+    <div className={styles.app}>
       <NavBar />
-      <Routes>
-        {/* if the user is logged in we have the user object else we have the user set to null */}
-        <Route path='/' element={user ? <Dashboard /> : <Landing />} />
-        <Route path='/sign-up' element={<SignUpForm />} />
-        <Route path='/sign-in' element={<SignInForm />} />
-        <Route path="/classes" element={<ClassList />} />
-        <Route path="/classes/new" element={<CreateClass />} />
-        <Route path="/classes/:id/edit" element={<UpdatClass />} />
-        <Route path="/classes/:id" element={<ClassDetail />} />
-        <Route path="/classes/:id/add-student" element={<AddStudent />}/>
-        <Route path="/student-class/:id" element={<ClassDashboard />}/>
-
-
+      <main className={styles.main}>
+        <Routes>
+          {/* if the user is logged in we have the user object else we have the user set to null */}
+          <Route path='/' element={user ? <Dashboard /> : <Landing />} />
+          <Route path='/sign-up' element={<SignUpForm />} />
+          <Route path='/sign-in' element={<SignInForm />} />
+          <Route path="/classes" element={<ClassList />} />
+          <Route path="/classes/new" element={<CreateClass />} />
+          <Route path="/classes/:id/edit" element={<UpdatClass />} />
+          <Route path="/classes/:id" element={<ClassDetail />} />
+          <Route path="/classes/:id/add-student" element={<AddStudent />}/>
+          <Route path="/student-class/:id" element={<ClassDashboard />}/>
+        </Routes>
+      </main>
       
-      </Routes>
-    </>
+      <footer className={styles.footer}>
+        <div className={styles.footerLeft}>
+          Made by Eng.Pengu
+        </div>
+        <div className={styles.footerCenter}>
+          © {new Date().getFullYear()} EngineerHub. All rights reserved.
+        </div>
+        <div className={styles.footerRight}>
+          Made by Eng. Help!
+        </div>
+      </footer>
+    </div>
   );
 };
 

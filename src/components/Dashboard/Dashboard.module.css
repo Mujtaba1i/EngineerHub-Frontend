@@ -1,0 +1,148 @@
+/* Dashboard.module.css */
+.dashboard {
+    background: white;
+    border-radius: 16px;
+    padding: 3rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    max-width: 1200px;
+    margin: 2rem auto;
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dashboard h1 {
+    color: #1a202c;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.dashboard h1::before {
+    content: '👋';
+    font-size: 2rem;
+}
+
+.dashboard h3 {
+    color: #2d3748;
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.dashboard h3::before {
+    content: '📚';
+}
+
+.quickLinks {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.linkCard {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
+    padding: 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.linkCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+}
+
+.linkCard a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    display: block;
+    padding: 2rem;
+}
+
+.classList {
+    list-style: none;
+    padding: 0;
+    margin-top: 1rem;
+    display: grid;
+    gap: 1rem;
+}
+
+.classItem {
+    background: linear-gradient(135deg, #f6f8fb 0%, #e9ecef 100%);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    border-left: 4px solid #667eea;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.classItem:hover {
+    transform: translateX(8px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+    border-left-color: #764ba2;
+}
+
+.classItem a {
+    color: #2d3748;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.classItem a::before {
+    content: '🎓';
+    font-size: 1.5rem;
+}
+
+.emptyState {
+    text-align: center;
+    padding: 3rem;
+    color: #718096;
+    font-size: 1.1rem;
+}
+
+.emptyState::before {
+    content: '📋';
+    display: block;
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+    .dashboard {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+
+    .dashboard h1 {
+        font-size: 1.75rem;
+    }
+
+    .quickLinks {
+        grid-template-columns: 1fr;
+    }
+}

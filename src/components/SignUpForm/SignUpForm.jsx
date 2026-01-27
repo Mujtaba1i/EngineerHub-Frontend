@@ -1,12 +1,13 @@
 import { useState, useContext } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate, Link } from 'react-router';
 import * as authService from '../../services/authService';
 import { UserContext } from '../../contexts/UserContext';
+import styles from './SignUpForm.module.css';
 
 const SignUpForm = () => {
   const navigate = useNavigate();
-  const [role,setRole] =useState('')
-  const [activeForm,setActiveForm] =useState('')
+  const [role, setRole] = useState('');
+  const [activeForm, setActiveForm] = useState('');
   const [message, setMessage] = useState('');
   const [formData, setFormData] = useState({
     name: '',
@@ -24,13 +25,13 @@ const SignUpForm = () => {
   const { setUser } = useContext(UserContext);
 
   const roleRequirements = {
-  student: ['uni_id', 'major'],
-  graduate: ['uni_id', 'major'],
-  doctor: ['department', 'phone_num', 'office_num'],
-  institution: ['license']
+    student: ['uni_id', 'major'],
+    graduate: ['uni_id', 'major'],
+    doctor: ['department', 'phone_num', 'office_num'],
+    institution: ['license']
   };
 
-  const { name, email, password, passwordConf ,uni_id,major,department,phone_num,office_num, license } = formData;
+  const { name, email, password, passwordConf, uni_id, major, department, phone_num, office_num, license } = formData;
 
   const handleChange = (evt) => {
     setMessage('');
@@ -39,24 +40,24 @@ const SignUpForm = () => {
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
-    const payload = {...formData, role}
-    delete payload.passwordConf
+    const payload = { ...formData, role };
+    delete payload.passwordConf;
     try {
-      if (payload.uni_id) payload.uni_id = parseInt(payload.uni_id)
+      if (payload.uni_id) payload.uni_id = parseInt(payload.uni_id);
     } catch (err) {
-      console.log('error convering to int')
+      console.log('error converting to int');
     }
     for (const field in payload) {
-      if (payload[field] === '')  {
+      if (payload[field] === '') {
         delete payload[field];
       }
     }
     
     console.log(payload);
-    const user = await authService.signUp(payload)
-    setUser(user); // this line will print the form data to the console
+    const user = await authService.signUp(payload);
+    setUser(user);
     console.log(formData);
-    navigate('/')
+    navigate('/');
   };
 
   const isFormInvalid = () => {
@@ -68,37 +69,36 @@ const SignUpForm = () => {
         if (!formData[field]) return true;
       }
     }
-
     return false;
   };
 
-function handleOptionSelection(evt){
-  setRole(evt.target.value)
-}
+  function handleOptionSelection(evt) {
+    setRole(evt.target.value);
+  }
 
   return (
-    <main>
+    <main className={styles.signUpContainer}>
       <h1>Sign Up</h1>
-      <p>{message}</p>
-      <form autoComplete='off' onSubmit={handleSubmit}>
-        <div>
+      <p className={styles.message}>{message}</p>
+      <form autoComplete='off' onSubmit={handleSubmit} className={styles.form}>
+        <div className={styles.formGroup}>
           <label htmlFor='name'>Name:</label>
           <input type='text' autoComplete='off' id='name' value={formData.name} name='name' onChange={handleChange} required />
         </div>
-        <div>
+        <div className={styles.formGroup}>
           <label htmlFor='email'>Email:</label>
           <input type='text' autoComplete='off' id='email' value={formData.email} name='email' onChange={handleChange} required />
         </div>
-        <div>
+        <div className={styles.formGroup}>
           <label htmlFor='password'>Password:</label>
           <input type='password' autoComplete='off' id='password' value={formData.password} name='password' onChange={handleChange} required/>
         </div>
-        <div>
+        <div className={styles.formGroup}>
           <label htmlFor='passwordConf'>Confirm Password:</label>
           <input type='password' autoComplete='off' id='passwordConf' value={formData.passwordConf} name='passwordConf' onChange={handleChange} required/>
         </div>
-        <div>
-          <label htmlFor='role'>role:</label>
+        <div className={`${styles.formGroup} ${styles.roleSection}`}>
+          <label htmlFor='role'>Role:</label>
           <select id='role' onChange={handleOptionSelection} value={role} name='role' required>
             <option value=''>Select Role</option>
             <option value='student'>Student</option>
@@ -106,46 +106,50 @@ function handleOptionSelection(evt){
             <option value='doctor'>Doctor</option>
             <option value='institution'>Institution</option>
           </select>
-          {(role === 'student' || role === 'gradute') && (<>
-          <div>
-            <label htmlFor='uni_id'>University ID:</label>
-            <input type='number' autoComplete='off' id='uni_id' value={formData.uni_id} name='uni_id' onChange={handleChange}/>
-          </div> 
-          <div> 
-            <label htmlFor='major'>Major:</label>
-            <input type='text' autoComplete='off' id='major' value={formData.major} name='major' onChange={handleChange}/>
-          </div>
-          <div>
-            <label htmlFor='phone_num'>Phone Number:</label>
-            <input type='text' autoComplete='off' id='phone_num' value={formData.phone_num} name='phone_num' onChange={handleChange}/>
-          </div>
-            </>)}
-            {role === 'doctor' && (<>
-          <div>
-            <label htmlFor='department'>Department:</label>
-            <input type='text' autoComplete='off' id='department' value={formData.department} name='department' onChange={handleChange}/>
-          </div>
-          <div>
-            <label htmlFor='phone_num'>Phone Number:</label>
-            <input type='text' autoComplete='off' id='phone_num' value={formData.phone_num} name='phone_num' onChange={handleChange}/>
-          </div>
-          <div>
-            <label htmlFor='office_num'>Office Number:</label>
-            <input type='text' autoComplete='off' id='office_num' value={formData.office_num} name='office_num' onChange={handleChange}/>
-          </div>
-            </>)}
-            {role === 'institution' && (<>
-          <div>
-            <label htmlFor='license'>License:</label>
-            <input type='text' autoComplete='off' id='license' value={formData.license} name='license' onChange={handleChange}/>
-          </div>
-          </>)}
+          {(role === 'student' || role === 'gradute') && (
+            <div className={styles.conditionalFields}>
+              <div className={styles.formGroup}>
+                <label htmlFor='uni_id'>University ID:</label>
+                <input type='number' autoComplete='off' id='uni_id' value={formData.uni_id} name='uni_id' onChange={handleChange}/>
+              </div> 
+              <div className={styles.formGroup}> 
+                <label htmlFor='major'>Major:</label>
+                <input type='text' autoComplete='off' id='major' value={formData.major} name='major' onChange={handleChange}/>
+              </div>
+              <div className={styles.formGroup}>
+                <label htmlFor='phone_num'>Phone Number:</label>
+                <input type='text' autoComplete='off' id='phone_num' value={formData.phone_num} name='phone_num' onChange={handleChange}/>
+              </div>
+            </div>
+          )}
+          {role === 'doctor' && (
+            <div className={styles.conditionalFields}>
+              <div className={styles.formGroup}>
+                <label htmlFor='department'>Department:</label>
+                <input type='text' autoComplete='off' id='department' value={formData.department} name='department' onChange={handleChange}/>
+              </div>
+              <div className={styles.formGroup}>
+                <label htmlFor='phone_num'>Phone Number:</label>
+                <input type='text' autoComplete='off' id='phone_num' value={formData.phone_num} name='phone_num' onChange={handleChange}/>
+              </div>
+              <div className={styles.formGroup}>
+                <label htmlFor='office_num'>Office Number:</label>
+                <input type='text' autoComplete='off' id='office_num' value={formData.office_num} name='office_num' onChange={handleChange}/>
+              </div>
+            </div>
+          )}
+          {role === 'institution' && (
+            <div className={styles.conditionalFields}>
+              <div className={styles.formGroup}>
+                <label htmlFor='license'>License:</label>
+                <input type='text' autoComplete='off' id='license' value={formData.license} name='license' onChange={handleChange}/>
+              </div>
+            </div>
+          )}
         </div>
-        <div>
-        </div>
-        <div>
-          <button disabled={isFormInvalid()}>Sign Up</button>
-          <button onClick={() => navigate('/')}>Cancel</button>
+        <div className={styles.buttonGroup}>
+          <button className={styles.submitButton} disabled={isFormInvalid()}>Sign Up</button>
+          <button className={styles.cancelButton} type="button" onClick={() => navigate('/')}>Cancel</button>
         </div>
       </form>
     </main>
@@ -153,4 +157,3 @@ function handleOptionSelection(evt){
 };
 
 export default SignUpForm;
-
