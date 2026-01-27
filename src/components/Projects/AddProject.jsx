@@ -27,25 +27,28 @@ function AddProject() {
     return (
         <form onSubmit={handleSubmit}>
             <label htmlFor="title"> Title:</label>
-            <input name="title" placeholder="title" onChange={handleChange} />
-            
+            <input type="text" name="title" placeholder="title" onChange={handleChange} />
+
             <label htmlFor="summary">Summary:</label>
-            <textarea name="summary" placeholder="summary" onChange={handleChange} />
-            
+            <textarea type="text" name="summary" placeholder="summary" onChange={handleChange} />
+
             <label htmlFor="major">Major:</label>
-            <input name="major" placeholder="major" onChange={handleChange} />
-            
+            <input type="text" name="major" placeholder="major" onChange={handleChange} />
+
+            <label htmlFor="poster">Poster:</label>
+            <input type="text" name="poster" placeholder="Poster image URL" onChange={handleChange} />
+
             <label htmlFor="graduation_year">Graduation Year:</label>
-            <input name="graduation_year" placeholder="graduation_year" onChange={handleChange} />
-            
+            <input type="number" name="graduation_year" placeholder="graduation_year" onChange={handleChange} />
+
             <label htmlFor="contact_email">Email:</label>
-            <input name="contact_email" placeholder="email" onChange={handleChange} />
-            
+            <input type="text" name="contact_email" placeholder="email" onChange={handleChange} />
+
             <label htmlFor="contact_phone">Phone:</label>
-            <input name="contact_phone" placeholder="phone" onChange={handleChange} />
-            
+            <input type="number" name="contact_phone" placeholder="phone" onChange={handleChange} />
+
             <label htmlFor="linkedin">LinkedIn:</label>
-            <input name="linkedin" placeholder="linkedin" onChange={handleChange} />
+            <input type="text" name="linkedin" placeholder="linkedin" onChange={handleChange} />
 
             <button type="submit"> Add Project </button>
         </form>
