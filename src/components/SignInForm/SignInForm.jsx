@@ -1,9 +1,8 @@
 import { useState, useContext } from 'react';
-import { useNavigate } from 'react-router';
-
+import { useNavigate, Link } from 'react-router';
 import { signIn } from '../../services/authService';
-
 import { UserContext } from '../../contexts/UserContext';
+import styles from './SignInForm.module.css';
 
 const SignInForm = () => {
   const navigate = useNavigate();
@@ -31,11 +30,11 @@ const SignInForm = () => {
   };
 
   return (
-    <main>
+    <main className={styles.signInContainer}>
       <h1>Sign In</h1>
-      <p>{message}</p>
-      <form autoComplete='off' onSubmit={handleSubmit}>
-        <div>
+      <p className={styles.message}>{message}</p>
+      <form autoComplete='off' onSubmit={handleSubmit} className={styles.form}>
+        <div className={styles.formGroup}>
           <label htmlFor='name'>Name:</label>
           <input
             type='text'
@@ -47,7 +46,7 @@ const SignInForm = () => {
             required
           />
         </div>
-        <div>
+        <div className={styles.formGroup}>
           <label htmlFor='password'>Password:</label>
           <input
             type='password'
@@ -59,11 +58,14 @@ const SignInForm = () => {
             required
           />
         </div>
-        <div>
-          <button>Sign In</button>
-          <button onClick={() => navigate('/')}>Cancel</button>
+        <div className={styles.buttonGroup}>
+          <button className={styles.signInButton}>Sign In</button>
+          <button className={styles.cancelButton} type="button" onClick={() => navigate('/')}>Cancel</button>
         </div>
       </form>
+      <p className={styles.signUpPrompt}>
+        Don't have an account? <Link to='/sign-up'>Sign Up</Link>
+      </p>
     </main>
   );
 };

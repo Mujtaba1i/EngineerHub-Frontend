@@ -1,0 +1,221 @@
+/* ClassDetail.module.css */
+.classDetail {
+    max-width: 900px;
+    margin: 2rem auto;
+    background: white;
+    border-radius: 16px;
+    padding: 3rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.classDetail h2 {
+    color: #1a202c;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.classDetail h2::before {
+    content: '📚';
+    font-size: 2.5rem;
+}
+
+.doctorInfo {
+    color: #2d3748;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    padding: 1rem 1.5rem;
+    background: linear-gradient(135deg, #f6f8fb 0%, #e9ecef 100%);
+    border-radius: 12px;
+    border-left: 4px solid #667eea;
+}
+
+.section {
+    margin-top: 2rem;
+}
+
+.section h3 {
+    color: #2d3748;
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.section h3::before {
+    content: '👥';
+    font-size: 1.5rem;
+}
+
+.studentList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.75rem;
+}
+
+.studentItem {
+    background: #f7fafc;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+    border-left: 4px solid #e2e8f0;
+}
+
+.studentItem:hover {
+    border-left-color: #667eea;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
+}
+
+.studentName {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #2d3748;
+    font-weight: 500;
+    font-size: 1.05rem;
+}
+
+.studentName::before {
+    content: '🎓';
+    font-size: 1.3rem;
+}
+
+.removeButton {
+    padding: 0.5rem 1rem;
+    background: #e53e3e;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.removeButton:hover {
+    background: #c53030;
+    transform: scale(1.05);
+}
+
+.emptyState {
+    text-align: center;
+    padding: 2rem;
+    color: #718096;
+    font-size: 1rem;
+}
+
+.actions {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-top: 2rem;
+    border-top: 2px solid #e2e8f0;
+}
+
+.actionLink {
+    padding: 0.875rem 1.5rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 14px rgba(102, 126, 234, 0.4);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.actionLink:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+}
+
+.editLink::before {
+    content: '✏️';
+}
+
+.addStudentLink::before {
+    content: '➕';
+}
+
+.deleteButton {
+    padding: 0.875rem 1.5rem;
+    background: #e53e3e;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 14px rgba(229, 62, 62, 0.4);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.deleteButton:hover {
+    background: #c53030;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(229, 62, 62, 0.5);
+}
+
+.deleteButton::before {
+    content: '🗑️';
+}
+
+.loading {
+    text-align: center;
+    padding: 4rem;
+    color: #667eea;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .classDetail {
+        padding: 2rem 1.5rem;
+        margin: 1rem;
+    }
+
+    .classDetail h2 {
+        font-size: 2rem;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+
+    .actionLink,
+    .deleteButton {
+        width: 100%;
+        justify-content: center;
+    }
+}

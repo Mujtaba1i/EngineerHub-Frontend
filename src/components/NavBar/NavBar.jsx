@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { Link } from 'react-router';
 
 import { UserContext } from '../../contexts/UserContext';
+import styles from './NavBar.module.css';
 
 const NavBar = () => {
   const { user, setUser } = useContext(UserContext);
@@ -15,21 +16,25 @@ const NavBar = () => {
   // {username, sub} if logged in or null if not, and shows
   // set of the correct set of links
   return (
-    <nav>
-      {user ? (
-        <ul>
-          <li>Welcome, {user.name}</li>
-          <li><Link to='/'>Dashboard</Link></li>
-          <li><Link to='/' onClick={handleSignOut}>Sign Out</Link></li>
-        </ul>
-      ) : (
-        <ul>
-          <li><Link to='/'>Home</Link></li>
-          <li><Link to='/sign-in'>Sign In</Link></li>
-          <li><Link to='/sign-up'>Sign Up</Link></li>
-        </ul>
-      )}
-    </nav>
+    <header className={styles.navbar}>
+      <nav>
+        {user ? (
+          <ul>
+            <li className={styles.logo}>EngineerHub</li>
+            <li><Link to='/'>Dashboard</Link></li>
+            <li>Welcome, {user.name}</li>
+            <li><Link to='/' onClick={handleSignOut}>Sign Out</Link></li>
+          </ul>
+        ) : (
+          <ul>
+            <li className={styles.logo}>EngineerHub</li>
+            <li><Link to='/'>Home</Link></li>
+            <li><Link to='/sign-in'>Sign In</Link></li>
+            <li><Link to='/sign-up'>Sign Up</Link></li>
+          </ul>
+        )}
+      </nav>
+    </header>
   );
 };
 
