@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import * as postService from '../../services/postService';
-// import styles from './CreatePost.module.css';
+import styles from './CreatePost.module.css';
 
 const CreatePost = () => {
   const navigate = useNavigate();

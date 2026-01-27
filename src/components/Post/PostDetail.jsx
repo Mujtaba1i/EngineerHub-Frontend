@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate, Link } from 'react-router';
 import * as postService from '../../services/postService';
 import { UserContext } from '../../contexts/UserContext';
-// import styles from './PostDetail.module.css';
+import styles from './PostDetail.module.css';
 
 const PostDetail = () => {
   const { user } = useContext(UserContext);
