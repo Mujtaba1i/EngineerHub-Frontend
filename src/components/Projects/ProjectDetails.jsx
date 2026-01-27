@@ -31,6 +31,13 @@ function ProjectDetails() {
             <p>Email: {project.contact_email}</p>
             <p>Phone: {project.contact_phone}</p>
             <p>LinkdIn: {project.contact_linkdin}</p>
+            {project.poster && (
+                <img
+                    src={project.poster}
+                    alt="Project Poster"
+                    style={{ width: '300px', marginTop: '10px' }}
+                />
+            )}
             {isOwner && (
                 <>
                     <button onClick={() => navigate(`/projects/edit/${id}`)}>
