@@ -2,15 +2,12 @@ import { useEffect, useState, useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
 import { Link } from 'react-router';
 import * as classService from '../../services/classService';
+import AnnouncementList from '../AnnouncementList/AnnouncementList';
 import styles from './Dashboard.module.css';
 
 const Dashboard = () => {
-  // Access the user object from UserContext
-  // This gives us the currently logged-in user's information (username, email) that we extract from the token
   const { user } = useContext(UserContext);
   const [classes, setClasses] = useState([]);
-
-  // Create state to store the message we'll receive from the backend
   const [message, setMessage] = useState('');
 
   async function getClasses() {
@@ -19,11 +16,11 @@ const Dashboard = () => {
   }
   
   useEffect(() => {
-    getClasses();
+    if (user.role === 'student' || user.role === 'graduate') {
+      getClasses();
+    }
   }, []);
 
-  // useEffect runs after the component renders
-  // This is where we perform side effects like API calls
   return (
     <main className={styles.dashboard}>
       <h1>Welcome, {user.name}</h1>
@@ -39,24 +36,31 @@ const Dashboard = () => {
         </div>
       )}
 
-      {user.role === 'student' && (
+      {(user.role === 'student' || user.role === 'graduate') && (
         <>
-          <h3>Your Classes</h3>
-          {classes.length > 0 ? (
-            <ul className={styles.classList}>
-              {classes.map(cls => (
-                <li key={cls.id} className={styles.classItem}>
-                  <Link to={'/student-class/' + cls.class_.id}>
-                    {cls.class_.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <div className={styles.emptyState}>
-              No classes enrolled yet
-            </div>
-          )}
+          <section className={styles.announcementsSection}>
+            <h2 className={styles.sectionHeader}>Your Announcements</h2>
+            <AnnouncementList />
+          </section>
+
+          <section className={styles.classesSection}>
+            <h3 className={styles.sectionHeader}>Your Classes</h3>
+            {classes.length > 0 ? (
+              <ul className={styles.classList}>
+                {classes.map(cls => (
+                  <li key={cls.id} className={styles.classItem}>
+                    <Link to={'/student-class/' + cls.class_.id}>
+                      {cls.class_.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <div className={styles.emptyState}>
+                No classes enrolled yet
+              </div>
+            )}
+          </section>
         </>
       )}
     </main>
