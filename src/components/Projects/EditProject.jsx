@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router'
 import { getOne, update } from '../../services/projectService'
+import styles from './AddProject.module.css'
 
 function EditProject() {
     const { id } = useParams()
@@ -21,74 +22,107 @@ function EditProject() {
         navigate(`/projects/${id}`)
     }
 
+    if (!form.title) return <div className={styles.loading}>Loading...</div>
+
     return (
-        <form onSubmit={handleSubmit}>
+        <main className={styles.container}>
+            <h1>Edit Project</h1>
+            <form onSubmit={handleSubmit} className={styles.form}>
+                <div className={styles.formGroup}>
+                    <label htmlFor="title">Title:</label>
+                    <input
+                        type="text"
+                        id="title"
+                        name="title"
+                        value={form.title || ''}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
 
-            <label htmlFor="title"> Title:</label>
-            <input
-                type="text"
-                name="title"
-                value={form.title || ''}
-                onChange={handleChange}
-            />
+                <div className={styles.formGroup}>
+                    <label htmlFor="summary">Summary:</label>
+                    <textarea
+                        id="summary"
+                        name="summary"
+                        value={form.summary || ''}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
 
+                <div className={styles.formGroup}>
+                    <label htmlFor="major">Major:</label>
+                    <input
+                        type="text"
+                        id="major"
+                        name="major"
+                        value={form.major || ''}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
 
-            <label htmlFor="summary">Summary:</label>
-            <textarea
-                name="summary"
-                value={form.summary || ''}
-                onChange={handleChange}
-            />
+                <div className={styles.formGroup}>
+                    <label htmlFor="poster">Poster Image URL:</label>
+                    <input
+                        type="text"
+                        id="poster"
+                        name="poster"
+                        value={form.poster || ''}
+                        onChange={handleChange}
+                    />
+                </div>
 
-            <label htmlFor="major">Major:</label>
-            <input
-                type="text"
-                name="major"
-                value={form.major || ''}
-                onChange={handleChange}
-            />
+                <div className={styles.formGroup}>
+                    <label htmlFor="graduation_year">Graduation Year:</label>
+                    <input
+                        type="number"
+                        id="graduation_year"
+                        name="graduation_year"
+                        value={form.graduation_year || ''}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
 
-            <label htmlFor="poster">Poster:</label>
-            <input
-                type="text"
-                name="poster"
-                value={form.poster || ''}
-                onChange={handleChange}
-            />
+                <div className={styles.formGroup}>
+                    <label htmlFor="contact_email">Email:</label>
+                    <input
+                        type="email"
+                        id="contact_email"
+                        name="contact_email"
+                        value={form.contact_email || ''}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
 
-            <label htmlFor="graduation_year">Graduation Year:</label>
-            <input
-                type="number"
-                name="graduation_year"
-                value={form.graduation_year || ''}
-                onChange={handleChange}
-            />
-            
-            <label htmlFor="contact_email">Email:</label>
-            <input
-                type="text"
-                name="contact_email"
-                value={form.contact_email || ''}
-                onChange={handleChange}
-            />
+                <div className={styles.formGroup}>
+                    <label htmlFor="contact_phone">Phone:</label>
+                    <input
+                        type="tel"
+                        id="contact_phone"
+                        name="contact_phone"
+                        value={form.contact_phone || ''}
+                        onChange={handleChange}
+                    />
+                </div>
 
-            <label htmlFor="contact_phone">Phone:</label>
-            <input
-                type="number"
-                name="contact_phone"
-                value={form.contact_phone || ''}
-                onChange={handleChange}
-            />
+                <div className={styles.formGroup}>
+                    <label htmlFor="linkedin">LinkedIn:</label>
+                    <input
+                        type="url"
+                        id="linkedin"
+                        name="linkedin"
+                        value={form.linkedin || ''}
+                        onChange={handleChange}
+                    />
+                </div>
 
-            <label htmlFor="linkedin">LinkedIn:</label>
-            <input
-                name="linkedin"
-                value={form.linkedin || ''}
-                onChange={handleChange}
-            />
-
-            <button type="submit"> Save </button>
-        </form>
+                <button type="submit" className={styles.submitButton}>Save Changes</button>
+            </form>
+        </main>
     )
 }
 

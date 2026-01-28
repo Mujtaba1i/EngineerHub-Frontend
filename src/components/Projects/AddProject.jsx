@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import { create } from '../../services/projectService'
+import styles from './AddProject.module.css'
 
 function AddProject() {
     const navigate = useNavigate()
@@ -8,6 +9,7 @@ function AddProject() {
         title: '',
         summary: '',
         major: '',
+        poster: '',
         graduation_year: '',
         contact_email: '',
         contact_phone: '',
@@ -25,33 +27,104 @@ function AddProject() {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label htmlFor="title"> Title:</label>
-            <input type="text" name="title" placeholder="title" onChange={handleChange} />
+        <main className={styles.container}>
+            <h1>Add Senior Project</h1>
+            <form onSubmit={handleSubmit} className={styles.form}>
+                <div className={styles.formGroup}>
+                    <label htmlFor="title">Title:</label>
+                    <input 
+                        type="text" 
+                        id="title"
+                        name="title" 
+                        placeholder="Project title" 
+                        onChange={handleChange}
+                        required 
+                    />
+                </div>
 
-            <label htmlFor="summary">Summary:</label>
-            <textarea type="text" name="summary" placeholder="summary" onChange={handleChange} />
+                <div className={styles.formGroup}>
+                    <label htmlFor="summary">Summary:</label>
+                    <textarea 
+                        id="summary"
+                        name="summary" 
+                        placeholder="Describe your project" 
+                        onChange={handleChange}
+                        required 
+                    />
+                </div>
 
-            <label htmlFor="major">Major:</label>
-            <input type="text" name="major" placeholder="major" onChange={handleChange} />
+                <div className={styles.formGroup}>
+                    <label htmlFor="major">Major:</label>
+                    <input 
+                        type="text" 
+                        id="major"
+                        name="major" 
+                        placeholder="Your major" 
+                        onChange={handleChange}
+                        required 
+                    />
+                </div>
 
-            <label htmlFor="poster">Poster:</label>
-            <input type="text" name="poster" placeholder="Poster image URL" onChange={handleChange} />
+                <div className={styles.formGroup}>
+                    <label htmlFor="poster">Poster Image URL:</label>
+                    <input 
+                        type="text" 
+                        id="poster"
+                        name="poster" 
+                        placeholder="https://example.com/image.jpg" 
+                        onChange={handleChange} 
+                    />
+                </div>
 
-            <label htmlFor="graduation_year">Graduation Year:</label>
-            <input type="number" name="graduation_year" placeholder="graduation_year" onChange={handleChange} />
+                <div className={styles.formGroup}>
+                    <label htmlFor="graduation_year">Graduation Year:</label>
+                    <input 
+                        type="number" 
+                        id="graduation_year"
+                        name="graduation_year" 
+                        placeholder="2024" 
+                        onChange={handleChange}
+                        required 
+                    />
+                </div>
 
-            <label htmlFor="contact_email">Email:</label>
-            <input type="text" name="contact_email" placeholder="email" onChange={handleChange} />
+                <div className={styles.formGroup}>
+                    <label htmlFor="contact_email">Email:</label>
+                    <input 
+                        type="email" 
+                        id="contact_email"
+                        name="contact_email" 
+                        placeholder="your.email@example.com" 
+                        onChange={handleChange}
+                        required 
+                    />
+                </div>
 
-            <label htmlFor="contact_phone">Phone:</label>
-            <input type="number" name="contact_phone" placeholder="phone" onChange={handleChange} />
+                <div className={styles.formGroup}>
+                    <label htmlFor="contact_phone">Phone:</label>
+                    <input 
+                        type="tel" 
+                        id="contact_phone"
+                        name="contact_phone" 
+                        placeholder="+123456789" 
+                        onChange={handleChange} 
+                    />
+                </div>
 
-            <label htmlFor="linkedin">LinkedIn:</label>
-            <input type="text" name="linkedin" placeholder="linkedin" onChange={handleChange} />
+                <div className={styles.formGroup}>
+                    <label htmlFor="linkedin">LinkedIn:</label>
+                    <input 
+                        type="url"
+                        id="linkedin"
+                        name="linkedin" 
+                        placeholder="https://linkedin.com/in/yourprofile" 
+                        onChange={handleChange} 
+                    />
+                </div>
 
-            <button type="submit"> Add Project </button>
-        </form>
+                <button type="submit" className={styles.submitButton}>Add Project</button>
+            </form>
+        </main>
     )
 }
 

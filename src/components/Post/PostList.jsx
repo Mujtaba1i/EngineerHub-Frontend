@@ -21,19 +21,37 @@ const PostList = () => {
     getPosts();
   }, []);
 
-  const myPosts = posts.filter(post => post.institute_id === Number(user.sub));
+  // تحديد إذا المستخدم institution أو لا
+  const isInstitution = user?.role === 'institution';
+  
+  // إذا institution: يشوف posts حقته فقط
+  // إذا مو institution: يشوف كل الـ posts
+  const displayPosts = isInstitution 
+    ? posts.filter(post => post.institute_id === Number(user.sub))
+    : posts;
 
   return (
     <main className={styles.postListContainer}>
-      <h1>My Posts</h1>
+      <div className={styles.header}>
+        {isInstitution ? (
+          <>
+            <h1>My Posts</h1>
+            <Link to="/posts/new" className={styles.addPostBtn}>
+              + Add Post
+            </Link>
+          </>
+        ) : (
+          <h1>All Posts</h1>
+        )}
+      </div>
 
-      {!myPosts.length ? (
+      {!displayPosts.length ? (
         <div className={styles.emptyState}>
-          No posts found
+          {isInstitution ? 'No posts found. Create your first post!' : 'No posts available'}
         </div>
       ) : (
         <ul className={styles.postList}>
-          {myPosts.map(post => (
+          {displayPosts.map(post => (
             <li key={post.id} className={styles.postItem}>
               <Link to={`/posts/${post.id}`}>
                 {post.title}

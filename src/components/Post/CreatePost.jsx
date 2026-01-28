@@ -22,7 +22,6 @@ const CreatePost = () => {
       navigate('/posts');
     } catch (error) {
       console.error('Failed to create post:', error);
-      alert('Failed to create post');
     }
   };
 
