@@ -23,17 +23,14 @@ import ProjectDetails from './components/Projects/ProjectDetails.jsx';
 import AddProject from './components/Projects/AddProject.jsx';
 import EditProject from './components/Projects/EditProject.jsx';
 
-<<<<<<< HEAD
 import NotesPage from './components/NotesPage/NotesPage.jsx';
 import UploadNote from './components/UploadNote/UploadNotes.jsx';
 import RecoverNote from './components/RecoverNote/RecoverNote.jsx';
-=======
 // Post component ==========================================================
 import PostDetail from './components/Post/PostDetail.jsx';
 import CreatePost from './components/Post/CreatePost.jsx';
 import PostList from './components/Post/PostList.jsx';
 import UpdatePost from './components/Post/UpdatePost.jsx';
->>>>>>> main
 
 import { UserContext } from './contexts/UserContext';
 import styles from './App.module.css';
