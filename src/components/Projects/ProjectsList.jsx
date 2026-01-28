@@ -13,12 +13,14 @@ function ProjectsList() {
     }, [])
     
     const userHasProject = !!(projects.find(project => parseInt(user?.sub) === project.user_id))
+    let isUserStudent = false 
+    if (user.role=== 'student' || user.role === 'graduate'){isUserStudent = true}
 
     return (
         <main className={styles.container}>
             <div className={styles.header}>
                 <h1>🎓 Senior Projects 🎓</h1>
-                {(user && !userHasProject) && (
+                {(user && !userHasProject && isUserStudent) && (
                     <Link to="/projects/add" className={styles.addButton}>
                         Add Your Project
                     </Link>

@@ -1,5 +1,6 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { UserContext } from "../../contexts/UserContext";
+import * as classService from '../../services/classService';
 import { addStudentToClass } from "../../services/studentClassService";
 import { useNavigate, useParams } from "react-router";
 import styles from './AddStudent.module.css';
@@ -8,11 +9,21 @@ const AddStudent = () => {
   const { id } = useParams();
   const { user } = useContext(UserContext);
   const [studentId, setStudentId] = useState("");
+  const [cls, setCls] = useState(null);
   const navigate = useNavigate();
 
-  const isOwnerDoctor = user?.role === "DOCTOR" && user.id === doctorId;
-
-  // if (!isOwnerDoctor) navigate('/');
+  const getClass = async () => {
+    try {
+      const data = await classService.getOne(id);
+      setCls(data);
+    } catch (error) {
+      console.error('Failed to fetch class:', error);
+    }
+  };
+  useEffect(()=>{
+    getClass()
+  },[])
+  const isOwnerDoctor = user?.role === "doctor" && user.id === cls?.doctor_id;
 
   function handleChange(event) {
     setStudentId(event.target.value);
@@ -27,6 +38,13 @@ const AddStudent = () => {
     });
     navigate(`/classes/${id}`);
   };
+
+  useEffect(() => {
+    if (!isOwnerDoctor) {
+      navigate("/");
+    }
+  }, [isOwnerDoctor])
+
 
   return (
     <main className={styles.addStudentContainer}>

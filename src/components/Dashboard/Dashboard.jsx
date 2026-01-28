@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import * as classService from '../../services/classService';
 import styles from './Dashboard.module.css';
 
@@ -8,6 +8,7 @@ const Dashboard = () => {
   const { user } = useContext(UserContext);
   const [classes, setClasses] = useState([]);
   const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   async function getClasses() {
     const response = await classService.getStudentClasses();
@@ -19,6 +20,12 @@ const Dashboard = () => {
       getClasses();
     }
   }, []);
+    useEffect(() => {
+    if (user.role === 'institution') {
+      navigate('/posts');
+    }
+  }, [user.role, navigate]);
+
 
   return (
     <main className={styles.dashboard}>
@@ -29,22 +36,25 @@ const Dashboard = () => {
       
       {user.role === 'doctor' && (
         <div className={styles.quickLinks}>
-          <div className={styles.linkCard}>
+          <Link to='/classes' className={styles.linkCard}>
             <div className={styles.cardIcon}>📚</div>
-            <Link to='/classes'>
+            <div className={styles.cardContent}>
               <span className={styles.cardTitle}>View All Classes</span>
               <span className={styles.cardArrow}>→</span>
-            </Link>
-          </div>
-          <div className={styles.linkCard}>
+            </div>
+          </Link>
+
+          <Link to='/classes/new' className={styles.linkCard}>
             <div className={styles.cardIcon}>✏️</div>
-            <Link to='/classes/new'>
+            <div className={styles.cardContent}>
               <span className={styles.cardTitle}>Create New Class</span>
               <span className={styles.cardArrow}>→</span>
-            </Link>
-          </div>
+            </div>
+          </Link>
         </div>
       )}
+
+
 
       {(user.role === 'student' || user.role === 'graduate') && (
         <section className={styles.classesSection}>

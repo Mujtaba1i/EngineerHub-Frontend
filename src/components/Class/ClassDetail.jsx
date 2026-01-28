@@ -29,9 +29,7 @@ const ClassDetail = () => {
   }, [id]);
 
   const handleDelete = async () => {
-    if (!window.confirm('Are you sure you want to delete this class?')) {
-      return;
-    }
+
     try {
       await classService.remove(id);
       navigate('/classes');
@@ -57,8 +55,16 @@ const ClassDetail = () => {
     setAnnouncementRefresh(prev => prev + 1);
   };
 
+    const userRole = user?.role;
+    if(userRole !== 'doctor') {
+      useEffect(() => {
+        navigate('/')
+      }, [])
+    }
   if (!cls) return <div className={styles.loading}>Loading...</div>;
-  
+    if (Number(user.sub) !== cls.doctor_id) {
+      navigate('/');
+    }
   const isDoctorOwner = cls.doctor_id === user.sub;
 
   if (!(user?.role === 'doctor' && parseInt(user?.sub) === cls.doctor_id)) {

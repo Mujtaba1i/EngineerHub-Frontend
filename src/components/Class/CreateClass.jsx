@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import { useState,useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import * as classService from '../../services/classService';
+import { UserContext } from '../../contexts/UserContext';
 import styles from './CreateClass.module.css';
 
 const CreateClass = () => {
   const navigate = useNavigate();
   const [formState, setFormState] = useState({ name: '' });
+  const { user } = useContext(UserContext);
   
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,6 +20,13 @@ const CreateClass = () => {
   const handleChange = (e) => {
     setFormState({ ...formState, name: e.target.value });
   };
+
+    const userRole = user?.role;
+    if(userRole !== 'doctor') {
+      useEffect(() => {
+        navigate('/')
+      }, [])
+    }
 
   return (
     <main className={styles.createClassContainer}>

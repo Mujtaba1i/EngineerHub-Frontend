@@ -1,4 +1,4 @@
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
 import * as postService from '../../services/postService';
@@ -7,6 +7,7 @@ import styles from './PostList.module.css';
 const PostList = () => {
   const [posts, setPosts] = useState([]);
   const { user } = useContext(UserContext);
+  const navigate = useNavigate()
 
   const getPosts = async () => {
     try {
@@ -17,15 +18,16 @@ const PostList = () => {
     }
   };
 
+  useEffect(()=>{
+    if (!user) navigate('/')
+  })
+  if(!user) return <div className={styles.loading}>Loading...</div>
   useEffect(() => {
     getPosts();
   }, []);
 
-  // تحديد إذا المستخدم institution أو لا
   const isInstitution = user?.role === 'institution';
   
-  // إذا institution: يشوف posts حقته فقط
-  // إذا مو institution: يشوف كل الـ posts
   const displayPosts = isInstitution 
     ? posts.filter(post => post.institute_id === Number(user.sub))
     : posts;

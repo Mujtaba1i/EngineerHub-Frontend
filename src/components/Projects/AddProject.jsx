@@ -1,10 +1,12 @@
-import { useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { create } from '../../services/projectService'
 import styles from './AddProject.module.css'
+import { UserContext } from '../../contexts/UserContext'
 
 function AddProject() {
     const navigate = useNavigate()
+    const { user } = useContext(UserContext);
     const [form, setForm] = useState({
         title: '',
         summary: '',
@@ -25,6 +27,12 @@ function AddProject() {
         await create(form)
         navigate('/projects')
     }
+
+    useEffect(() => {
+        if (user?.role !== 'student' || user?.role !== 'graduate') {
+            navigate('/')
+        }
+    }, [user, navigate])
 
     return (
         <main className={styles.container}>

@@ -31,6 +31,14 @@ function ClassDashboard() {
     navigate('/');
   };
 
+  const userRole = user?.role;
+
+  if(userRole !== 'student' && userRole !== 'graduate') {
+    useEffect(() => {
+      navigate('/')
+    }, [])
+  }
+
   return (
     <main className={styles.classDashboard}>
       <div className={styles.header}>
@@ -70,7 +78,7 @@ function ClassDashboard() {
         </section>
       </div>
 
-      {(user?.role === "student" || user.role === 'graduate') && (
+      {(user?.role === "student" || user?.role === 'graduate') && (
         <button onClick={handleLeave} className={styles.leaveButton}>
           Leave Class
         </button>

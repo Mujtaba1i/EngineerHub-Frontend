@@ -23,9 +23,10 @@ import ProjectDetails from './components/Projects/ProjectDetails.jsx';
 import AddProject from './components/Projects/AddProject.jsx';
 import EditProject from './components/Projects/EditProject.jsx';
 
+// Upload component =========================================================
 import NotesPage from './components/NotesPage/NotesPage.jsx';
 import UploadNote from './components/UploadNote/UploadNotes.jsx';
-import RecoverNote from './components/RecoverNote/RecoverNote.jsx';
+
 // Post component ==========================================================
 import PostDetail from './components/Post/PostDetail.jsx';
 import CreatePost from './components/Post/CreatePost.jsx';
@@ -36,8 +37,6 @@ import { UserContext } from './contexts/UserContext';
 import styles from './App.module.css';
 
 const App = () => {
-  // Access the user object from UserContext
-  // This gives us the currently logged-in user's information (username, email) that we extract from the token
   const { user } = useContext(UserContext);
 
   return (
@@ -45,7 +44,6 @@ const App = () => {
       <NavBar />
       <main className={styles.main}>
         <Routes>
-          {/* if the user is logged in we have the user object else we have the user set to null */}
           <Route path='/' element={user ? <Dashboard /> : <Landing />} />
           <Route path='/sign-up' element={<SignUpForm />} />
           <Route path='/sign-in' element={<SignInForm />} />
@@ -56,17 +54,15 @@ const App = () => {
           <Route path="/classes/:id/add-student" element={<AddStudent />} />
           <Route path="/student-class/:id" element={<ClassDashboard />} />
           <Route path="/projects" element={<ProjectsList />} />
-          <Route path="/projects/:id" element={<ProjectDetails currentUser={user} />} />
+          <Route path="/projects/:id" element={<ProjectDetails />} />
           <Route path="/projects/add" element={<AddProject />} />
-          <Route path="/projects/edit/:id" element={<EditProject />} />
+          <Route path="/projects/:id/edit" element={<EditProject />} />
           <Route path="/notes" element={<NotesPage />} />
           <Route path="/notes/upload" element={<UploadNote />} />
-          <Route path="/notes/recover/:encodedFileKey" element={<RecoverNote />} />
           <Route path="/posts" element={<PostList />} />
           <Route path="/posts/new" element={<CreatePost />} />
           <Route path="/posts/:id" element={<PostDetail />} />
           <Route path="/posts/:id/edit" element={<UpdatePost />} />
-
         </Routes>
       </main>
 

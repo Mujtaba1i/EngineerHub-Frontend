@@ -1,4 +1,4 @@
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import * as classService from '../../services/classService';
 import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
@@ -8,6 +8,7 @@ const ClassList = () => {
   const [classes, setClasses] = useState([]);
   const { user } = useContext(UserContext);
 
+  const navigate = useNavigate()
   async function getClss() {
     const allClasses = await classService.getAll();
     setClasses(allClasses);
@@ -20,6 +21,13 @@ const ClassList = () => {
   const doctorClasses = classes.filter(
     cls => cls.doctor_id === Number(user.sub)
   );
+
+  const userRole = user?.role;
+  if(userRole !== 'doctor') {
+    useEffect(() => {
+      navigate('/')
+    }, [])
+  }
 
   return (
     <main className={styles.classListContainer}>
