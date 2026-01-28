@@ -1,0 +1,220 @@
+.noteCard {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  transition: all 0.3s ease;
+}
+
+.noteCard:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-color: #007bff;
+}
+
+.fileIcon {
+  font-size: 32px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background: white;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  word-break: break-word;
+}
+
+.metadata {
+  display: flex;
+  gap: 12px;
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.courseCode {
+  background: #e3f2fd;
+  color: #1976d2;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.year {
+  padding: 2px 8px;
+  color: #666;
+}
+
+.doctor {
+  margin: 8px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.description {
+  margin: 8px 0 0 0;
+  font-size: 13px;
+  color: #777;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+.downloadBtn {
+  padding: 8px 12px;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: background 0.3s;
+  white-space: nowrap;
+}
+
+.downloadBtn:hover {
+  background: #218838;
+}
+
+.downloadBtn:active {
+  transform: scale(0.98);
+}
+
+.reactions {
+  display: flex;
+  gap: 8px;
+}
+
+.likeBtn,
+.dislikeBtn {
+  padding: 6px 10px;
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.3s;
+  min-width: 50px;
+  text-align: center;
+}
+
+.likeBtn:hover {
+  background: #e8f5e9;
+  border-color: #4caf50;
+}
+
+.dislikeBtn:hover {
+  background: #ffebee;
+  border-color: #f44336;
+}
+
+.likeBtn.active {
+  background: #4caf50;
+  color: white;
+  border-color: #4caf50;
+}
+
+.dislikeBtn.active {
+  background: #f44336;
+  color: white;
+  border-color: #f44336;
+}
+
+.ownerActions {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.editBtn,
+.deleteBtn {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.3s;
+  white-space: nowrap;
+}
+
+.editBtn {
+  background: #ffc107;
+  color: #333;
+}
+
+.editBtn:hover {
+  background: #ffb300;
+}
+
+.deleteBtn {
+  background: #dc3545;
+  color: white;
+}
+
+.deleteBtn:hover:not(:disabled) {
+  background: #c82333;
+}
+
+.deleteBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.deleteBtn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+@media (max-width: 768px) {
+  .noteCard {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .actions {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .reactions {
+    flex: 1;
+    justify-content: flex-end;
+  }
+
+  .ownerActions {
+    width: 100%;
+    flex-direction: row;
+  }
+
+  .metadata {
+    gap: 8px;
+  }
+}
