@@ -23,7 +23,16 @@ const AddStudent = () => {
   useEffect(()=>{
     getClass()
   },[])
-  const isOwnerDoctor = user?.role === "doctor" && user.id === cls?.doctor_id;
+
+    useEffect(() => {
+    if (!user || !cls) return;
+
+    const isOwnerDoctor = user.role === "doctor" && parseInt(user.sub) === cls.doctor_id;
+
+    if (!isOwnerDoctor) {
+      navigate("/");
+    }
+  }, [user, cls, navigate]);
 
   function handleChange(event) {
     setStudentId(event.target.value);
@@ -39,12 +48,9 @@ const AddStudent = () => {
     navigate(`/classes/${id}`);
   };
 
-  useEffect(() => {
-    if (!isOwnerDoctor) {
-      navigate("/");
-    }
-  }, [isOwnerDoctor])
-
+  if (!user || !cls) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <main className={styles.addStudentContainer}>

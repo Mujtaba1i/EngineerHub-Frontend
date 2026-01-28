@@ -14,7 +14,7 @@ function ProjectsList() {
     
     const userHasProject = !!(projects.find(project => parseInt(user?.sub) === project.user_id))
     let isUserStudent = false 
-    if (user.role=== 'student' || user.role === 'graduate'){isUserStudent = true}
+    if (user?.role=== 'student' || user?.role === 'graduate'){isUserStudent = true}
 
     return (
         <main className={styles.container}>
