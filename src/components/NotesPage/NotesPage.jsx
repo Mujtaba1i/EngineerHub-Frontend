@@ -10,15 +10,10 @@ const NotesPage = () => {
   const navigate = useNavigate();
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [orphanedFiles, setOrphanedFiles] = useState([]);
-  const [showOrphanedFiles, setShowOrphanedFiles] = useState(false);
   const [filters, setFilters] = useState({
-    course_code: '',
-    year: '',
     search: ''
   });
 
-  // Redirect if not student/graduate
   useEffect(() => {
     if (!user || (user.role !== 'student' && user.role !== 'graduate')) {
       navigate('/');
@@ -36,21 +31,8 @@ const NotesPage = () => {
       setLoading(false);
     }
   };
-
-  const checkOrphanedFiles = async () => {
-    try {
-      const result = await noteService.listOrphanedFiles();
-      if (result.files && result.files.length > 0) {
-        setOrphanedFiles(result.files);
-      }
-    } catch (error) {
-      console.error('Failed to check for orphaned files:', error);
-    }
-  };
-
   useEffect(() => {
     fetchNotes();
-    checkOrphanedFiles();
   }, []);
 
   const handleFilterChange = (e) => {
@@ -69,7 +51,6 @@ const NotesPage = () => {
 
   const handleNoteUpdate = () => {
     fetchNotes();
-    checkOrphanedFiles();
   };
 
   if (loading) {
@@ -85,7 +66,6 @@ const NotesPage = () => {
         </Link>
       </div>
 
-      {/* Filters */}
       <form onSubmit={handleSearch} className={styles.filters}>
         <div className={styles.filterGroup}>
           <input
@@ -97,28 +77,7 @@ const NotesPage = () => {
             className={styles.searchInput}
           />
         </div>
-        <div className={styles.filterGroup}>
-          <input
-            type="text"
-            name="course_code"
-            placeholder="Course Code (e.g., CS101)"
-            value={filters.course_code}
-            onChange={handleFilterChange}
-            className={styles.filterInput}
-          />
-        </div>
-        <div className={styles.filterGroup}>
-          <input
-            type="number"
-            name="year"
-            placeholder="Year (e.g., 2024)"
-            value={filters.year}
-            onChange={handleFilterChange}
-            className={styles.filterInput}
-            min="2000"
-            max="2100"
-          />
-        </div>
+
         <button type="submit" className={styles.searchButton}>
           Search
         </button>
@@ -131,13 +90,9 @@ const NotesPage = () => {
         </button>
       </form>
 
-      {/* Notes List */}
       {notes.length === 0 ? (
         <div className={styles.emptyState}>
           <p>No notes found</p>
-          <Link to='/notes/upload' className={styles.uploadLink}>
-            Be the first to upload!
-          </Link>
         </div>
       ) : (
         <div className={styles.notesList}>
