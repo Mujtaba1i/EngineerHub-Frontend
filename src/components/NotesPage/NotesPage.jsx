@@ -85,42 +85,6 @@ const NotesPage = () => {
         </Link>
       </div>
 
-      {/* Orphaned Files Alert */}
-      {orphanedFiles.length > 0 && (
-        <div className={styles.orphanedAlert}>
-          <div className={styles.alertContent}>
-            <p>
-              <strong>⚠️ Found {orphanedFiles.length} file(s) in Azure that aren't linked to notes yet.</strong>
-            </p>
-            <p>These files were uploaded but the form wasn't completed. Would you like to link them to your notes?</p>
-            <button 
-              onClick={() => setShowOrphanedFiles(!showOrphanedFiles)}
-              className={styles.expandButton}
-            >
-              {showOrphanedFiles ? '▼ Hide' : '▶ Show'} Orphaned Files
-            </button>
-          </div>
-
-          {showOrphanedFiles && (
-            <div className={styles.orphanedFilesList}>
-              {orphanedFiles.map((file, idx) => (
-                <Link 
-                  key={idx}
-                  to={`/notes/recover/${btoa(file.file_key)}`}
-                  className={styles.orphanedFileItem}
-                >
-                  <div>
-                    <strong>{file.file_name}</strong>
-                    <p>📦 {(file.size / 1024).toFixed(2)} KB • Uploaded: {file.created_at ? new Date(file.created_at).toLocaleDateString() : 'Unknown'}</p>
-                  </div>
-                  <span>→ Complete Metadata</span>
-                </Link>
-              ))}
-            </div>
-          )}
-        </div>
-      )}
-
       {/* Filters */}
       <form onSubmit={handleSearch} className={styles.filters}>
         <div className={styles.filterGroup}>
