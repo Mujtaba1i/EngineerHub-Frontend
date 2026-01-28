@@ -17,7 +17,6 @@ const AnnouncementList = ({ classId, canDelete = false, refresh = 0 }) => {
       if (classId) {
         data = await announcementService.getClassAnnouncements(classId);
       } else {
-        console.log('Fetching my announcements');
         data = await announcementService.getMyAnnouncements();
       }
       

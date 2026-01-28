@@ -23,6 +23,10 @@ import ProjectDetails from './components/Projects/ProjectDetails.jsx';
 import AddProject from './components/Projects/AddProject.jsx';
 import EditProject from './components/Projects/EditProject.jsx';
 
+import NotesPage from './components/NotesPage/NotesPage.jsx';
+import UploadNote from './components/UploadNote/UploadNotes.jsx';
+import RecoverNote from './components/RecoverNote/RecoverNote.jsx';
+
 import { UserContext } from './contexts/UserContext';
 import styles from './App.module.css';
 
@@ -50,6 +54,9 @@ const App = () => {
           <Route path="/projects/:id" element={<ProjectDetails currentUser={user} />} />
           <Route path="/projects/add" element={<AddProject />} />
           <Route path="/projects/edit/:id" element={<EditProject />} />
+          <Route path="/notes" element={<NotesPage />} />
+          <Route path="/notes/upload" element={<UploadNote />} />
+          <Route path="/notes/recover/:encodedFileKey" element={<RecoverNote />} />
 
         </Routes>
       </main>
