@@ -31,7 +31,7 @@ const PostDetail = () => {
   };
 
   useEffect(() => {
-    if (!user || (user.role !== 'institution' && user.role !== 'student' && user.role !== 'graduate')) navigate('/');
+    if (!user || (user.role !== 'institution' && user.role !== 'student' && user.role !== 'graduate' && user.role !== 'doctor')) navigate('/');
   }, [user, navigate]);
 
   useEffect(() => {
