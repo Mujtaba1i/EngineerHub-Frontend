@@ -1,232 +1,229 @@
-/* AnnouncementCard.module.css */
-.card {
-    border-radius: 12px;
-    padding: 1.5rem;
-    margin-bottom: 1rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    border-left: 6px solid;
-    animation: slideIn 0.3s ease-out;
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Libre+Baskerville:wght@400;600&display=swap');
+
+:root {
+  --navy-900: #0A1628;
+  --navy-700: #1B2A4A;
+  --purple-700: #4E3178;
+  --purple-600: #5F3C8D;
+  --purple-500: #7047A2;
+  --purple-400: #8B5FC7;
+  --lavender-100: #F5F3FF;
+  --lavender-200: #EDE9FE;
+  --lavender-300: #DDD6FE;
+  --text-dark: #0A1628;
+  --text-medium: #1B2A4A;
+  --text-light: #2D4A6E;
 }
 
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateX(-20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+.announcementCard {
+  background: white;
+  border: 2px solid var(--lavender-200);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-/* Urgency Color Coding */
-.urgent {
-    background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%);
-    border-left-color: #e53e3e;
+.announcementCard::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, var(--purple-600), var(--purple-400));
+  transition: width 0.3s ease;
 }
 
-.urgent:hover {
-    box-shadow: 0 4px 16px rgba(229, 62, 62, 0.3);
-    transform: translateY(-2px);
+.announcementCard:hover {
+  border-color: var(--purple-400);
+  box-shadow: 0 4px 15px rgba(112, 71, 162, 0.15);
+  transform: translateX(4px);
 }
 
-.soon {
-    background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
-    border-left-color: #f59e0b;
+.announcementCard:hover::before {
+  width: 6px;
 }
 
-.soon:hover {
-    box-shadow: 0 4px 16px rgba(245, 158, 11, 0.3);
-    transform: translateY(-2px);
+.announcementCard.past {
+  opacity: 0.7;
+  background: linear-gradient(135deg, var(--lavender-100), white);
 }
 
-.normal {
-    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-    border-left-color: #10b981;
+.announcementCard.past::before {
+  background: linear-gradient(180deg, #9CA3AF, #D1D5DB);
 }
 
-.normal:hover {
-    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
-    transform: translateY(-2px);
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+  gap: 1rem;
 }
 
-.past {
-    background: linear-gradient(135deg, #f7fafc 0%, #e2e8f0 100%);
-    border-left-color: #94a3b8;
-    opacity: 0.7;
-}
-
-.past .title,
-.past .description,
-.past .dateLabel,
-.past .timeLabel {
-    color: #64748b;
-}
-
-.compact {
-    padding: 1rem 1.5rem;
-    cursor: pointer;
-}
-
-.compact:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
-}
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 0.5rem;
-}
-
-.compact .header {
-    margin-bottom: 0;
-}
-
-.titleSection {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-    flex: 1;
-}
-
-.title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #1a202c;
-    margin: 0;
-}
-
-.urgencyBadge {
-    font-size: 0.875rem;
-    font-weight: 600;
-    padding: 0.375rem 0.75rem;
-    border-radius: 20px;
-    white-space: nowrap;
-}
-
-.urgent .urgencyBadge {
-    background: #e53e3e;
-    color: white;
-}
-
-.soon .urgencyBadge {
-    background: #f59e0b;
-    color: white;
-}
-
-.normal .urgencyBadge {
-    background: #10b981;
-    color: white;
-}
-
-.past .urgencyBadge {
-    background: #94a3b8;
-    color: white;
+.actionButtons {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 .expandButton {
-    background: none;
-    border: none;
-    font-size: 1rem;
-    color: #64748b;
-    cursor: pointer;
-    padding: 0.25rem 0.5rem;
-    transition: transform 0.3s ease;
+  padding: 0.4rem 0.6rem;
+  background: linear-gradient(135deg, var(--purple-600), var(--purple-500));
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(95, 60, 141, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 28px;
 }
 
 .expandButton:hover {
-    transform: scale(1.2);
+  background: linear-gradient(135deg, var(--purple-700), var(--purple-600));
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(95, 60, 141, 0.35);
 }
 
-.content {
-    animation: fadeIn 0.3s ease-out;
+.cardTitle {
+  font-family: 'Crimson Text', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--navy-900);
+  margin: 0;
+  line-height: 1.3;
+  flex: 1;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-.description {
-    color: #2d3748;
-    font-size: 1rem;
-    line-height: 1.6;
-    margin: 1rem 0;
-    white-space: pre-wrap;
-}
-
-.footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 2px solid rgba(0, 0, 0, 0.05);
-    flex-wrap: wrap;
-    gap: 1rem;
-}
-
-.dateInfo {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.dateLabel,
-.timeLabel {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: #2d3748;
+.past .cardTitle {
+  color: var(--text-light);
 }
 
 .deleteButton {
-    padding: 0.5rem 1rem;
-    background: #e53e3e;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
+  padding: 0.4rem 0.8rem;
+  background: linear-gradient(135deg, #DC2626, #B91C1C);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-family: 'Libre Baskerville', serif;
+  font-weight: 600;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(220, 38, 38, 0.25);
+  flex-shrink: 0;
 }
 
 .deleteButton:hover {
-    background: #c53030;
-    transform: scale(1.05);
+  background: linear-gradient(135deg, #B91C1C, #991B1B);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(220, 38, 38, 0.35);
 }
 
-@media (max-width: 768px) {
-    .card {
-        padding: 1rem;
-    }
+.cardContent {
+  margin-bottom: 0.75rem;
+  animation: expandContent 0.3s ease-out;
+  overflow: hidden;
+}
 
-    .title {
-        font-size: 1.1rem;
-    }
+@keyframes expandContent {
+  from {
+    opacity: 0;
+    max-height: 0;
+    margin-bottom: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 500px;
+    margin-bottom: 0.75rem;
+  }
+}
 
-    .titleSection {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-    }
+.description {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 0.9rem;
+  color: var(--text-medium);
+  margin: 0;
+  line-height: 1.5;
+}
 
-    .footer {
-        flex-direction: column;
-        align-items: flex-start;
-    }
+.past .description {
+  color: var(--text-light);
+}
 
-    .deleteButton {
-        width: 100%;
-    }
+.cardFooter {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--lavender-200);
+}
+
+.dateInfo,
+.classInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: 'Libre Baskerville', serif;
+  font-size: 0.8rem;
+  color: var(--text-light);
+}
+
+.dateInfo {
+  color: var(--purple-600);
+  font-weight: 600;
+}
+
+.past .dateInfo {
+  color: var(--text-light);
+}
+
+.icon {
+  font-size: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .announcementCard {
+    padding: 0.875rem 1rem;
+  }
+
+  .cardHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .actionButtons {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .deleteButton {
+    flex: 1;
+    padding: 0.6rem 1rem;
+  }
+
+  .cardTitle {
+    font-size: 1.05rem;
+  }
+
+  .description {
+    font-size: 0.85rem;
+  }
+
+  .cardFooter {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
 }

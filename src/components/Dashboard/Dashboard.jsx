@@ -2,7 +2,6 @@ import { useEffect, useState, useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
 import { Link } from 'react-router';
 import * as classService from '../../services/classService';
-import AnnouncementList from '../AnnouncementList/AnnouncementList';
 import styles from './Dashboard.module.css';
 
 const Dashboard = () => {
@@ -23,45 +22,57 @@ const Dashboard = () => {
 
   return (
     <main className={styles.dashboard}>
-      <h1>Welcome, {user.name}</h1>
+      <div className={styles.headerSection}>
+        <h1>Welcome, {user.name}</h1>
+        <div className={styles.headerDecor}></div>
+      </div>
       
       {user.role === 'doctor' && (
         <div className={styles.quickLinks}>
           <div className={styles.linkCard}>
-            <Link to='/classes'>View All Classes</Link>
+            <div className={styles.cardIcon}>📚</div>
+            <Link to='/classes'>
+              <span className={styles.cardTitle}>View All Classes</span>
+              <span className={styles.cardArrow}>→</span>
+            </Link>
           </div>
           <div className={styles.linkCard}>
-            <Link to='/classes/new'>Create a New Class</Link>
+            <div className={styles.cardIcon}>✏️</div>
+            <Link to='/classes/new'>
+              <span className={styles.cardTitle}>Create New Class</span>
+              <span className={styles.cardArrow}>→</span>
+            </Link>
           </div>
         </div>
       )}
 
       {(user.role === 'student' || user.role === 'graduate') && (
-        <>
-          <section className={styles.announcementsSection}>
-            <h2 className={styles.sectionHeader}>Your Announcements</h2>
-            <AnnouncementList />
-          </section>
-
-          <section className={styles.classesSection}>
-            <h3 className={styles.sectionHeader}>Your Classes</h3>
-            {classes.length > 0 ? (
-              <ul className={styles.classList}>
-                {classes.map(cls => (
-                  <li key={cls.id} className={styles.classItem}>
-                    <Link to={'/student-class/' + cls.class_.id}>
-                      {cls.class_.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <div className={styles.emptyState}>
-                No classes enrolled yet
-              </div>
-            )}
-          </section>
-        </>
+        <section className={styles.classesSection}>
+          <div className={styles.sectionTitle}>
+            <div className={styles.titleIcon}>🎓</div>
+            <h3>Your Classes</h3>
+          </div>
+          {classes.length > 0 ? (
+            <div className={styles.classGrid}>
+              {classes.map(cls => (
+                <div key={cls.id} className={styles.classCard}>
+                  <div className={styles.classCardHeader}>
+                    <div className={styles.classIcon}>⚙️</div>
+                  </div>
+                  <Link to={'/student-class/' + cls.class_.id}>
+                    <h4>{cls.class_.name}</h4>
+                    <span className={styles.viewDetails}>View Details →</span>
+                  </Link>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className={styles.emptyState}>
+              <div className={styles.emptyIcon}>📋</div>
+              <p>No classes enrolled yet</p>
+            </div>
+          )}
+        </section>
       )}
     </main>
   );

@@ -1,150 +1,314 @@
-/* ClassDashboard.module.css */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Crimson+Text:wght@400;600;700&family=Libre+Baskerville:wght@400;700&display=swap');
+
+:root {
+  --navy-900: #0A1628;
+  --navy-800: #132039;
+  --navy-700: #1B2A4A;
+  --navy-600: #243A5C;
+  
+  --purple-900: #2D1B4E;
+  --purple-800: #3D2663;
+  --purple-700: #4E3178;
+  --purple-600: #5F3C8D;
+  --purple-500: #7047A2;
+  --purple-400: #8B5FC7;
+  
+  --lavender-100: #F5F3FF;
+  --lavender-200: #EDE9FE;
+  --lavender-300: #DDD6FE;
+  
+  --light-bg: #FAFBFF;
+  --light-secondary: #F0F4FF;
+  
+  --text-dark: #0A1628;
+  --text-medium: #1B2A4A;
+  
+  --shadow-soft: 0 4px 20px rgba(10, 22, 40, 0.08);
+  --shadow-medium: 0 8px 30px rgba(10, 22, 40, 0.12);
+  --shadow-purple: 0 8px 30px rgba(112, 71, 162, 0.15);
+}
+
 .classDashboard {
-    max-width: 900px;
-    margin: 2rem auto;
-    background: white;
-    border-radius: 16px;
-    padding: 3rem;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    animation: fadeIn 0.5s ease-out;
+  max-width: 1400px;
+  margin: 2rem auto;
+  padding: 0 2rem 2rem;
+  animation: fadeIn 0.6s ease-out;
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.classDashboard h2 {
-    color: #1a202c;
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+.header {
+  background: white;
+  border-radius: 20px;
+  padding: 2.5rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-soft);
+  border: 2px solid var(--lavender-200);
 }
 
-.classDashboard h2::before {
-    content: '📚';
-    font-size: 2.5rem;
+.header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--navy-900), var(--purple-700));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0 0 1rem 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header h2::before {
+  content: '📚';
+  font-size: 2.5rem;
+  filter: none;
+  -webkit-text-fill-color: initial;
 }
 
 .doctorInfo {
-    background: linear-gradient(135deg, #f6f8fb 0%, #e9ecef 100%);
-    padding: 1.5rem;
-    border-radius: 12px;
-    margin-bottom: 2rem;
-    border-left: 4px solid #667eea;
-}
-
-.doctorInfo p {
-    color: #2d3748;
-    font-size: 1.1rem;
-    margin: 0;
+  font-family: 'Crimson Text', serif;
+  color: var(--text-medium);
+  font-size: 1.15rem;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(135deg, var(--lavender-100), var(--lavender-200));
+  border-radius: 12px;
+  border-left: 4px solid var(--purple-600);
 }
 
 .doctorInfo strong {
-    color: #667eea;
+  color: var(--purple-700);
+  font-weight: 700;
 }
 
-.section {
-    margin-top: 2rem;
+.contentGrid {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 2rem;
+  margin-bottom: 2rem;
 }
 
-.section h3 {
-    color: #2d3748;
-    font-size: 1.75rem;
-    margin-bottom: 1rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
+/* Announcements Section - Left Column */
+.announcementsSection {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: var(--shadow-soft);
+  border: 2px solid var(--lavender-200);
+  display: flex;
+  flex-direction: column;
 }
 
-.section h3::before {
-    content: '👥';
-    font-size: 1.5rem;
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--lavender-200);
+}
+
+.sectionHeader h3 {
+  font-family: 'Crimson Text', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--navy-900), var(--purple-700));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.announcementsSection .sectionHeader h3::before {
+  content: '📢';
+  font-size: 1.5rem;
+  filter: none;
+  -webkit-text-fill-color: initial;
+}
+
+.studentsSection .sectionHeader h3::before {
+  content: '👥';
+  font-size: 1.5rem;
+  filter: none;
+  -webkit-text-fill-color: initial;
+}
+
+.announcementsWrapper {
+  flex: 1;
+  overflow-y: auto;
+  max-height: 600px;
+  padding-right: 0.5rem;
+}
+
+.announcementsWrapper::-webkit-scrollbar {
+  width: 6px;
+}
+
+.announcementsWrapper::-webkit-scrollbar-track {
+  background: var(--lavender-100);
+  border-radius: 3px;
+}
+
+.announcementsWrapper::-webkit-scrollbar-thumb {
+  background: var(--purple-400);
+  border-radius: 3px;
+}
+
+.announcementsWrapper::-webkit-scrollbar-thumb:hover {
+  background: var(--purple-600);
+}
+
+/* Students Section - Right Column */
+.studentsSection {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: var(--shadow-soft);
+  border: 2px solid var(--lavender-200);
 }
 
 .studentList {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
 .studentItem {
-    background: #f7fafc;
-    padding: 1.25rem 1.5rem;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    transition: all 0.3s ease;
-    border-left: 4px solid #e2e8f0;
+  background: linear-gradient(135deg, var(--lavender-100), var(--lavender-200));
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: all 0.3s ease;
+  border-left: 4px solid var(--lavender-300);
+  font-family: 'Crimson Text', serif;
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--text-dark);
 }
 
 .studentItem:hover {
-    transform: translateX(5px);
-    border-left-color: #667eea;
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+  border-left-color: var(--purple-600);
+  box-shadow: 0 4px 15px rgba(112, 71, 162, 0.15);
+  transform: translateX(4px);
 }
 
 .studentItem::before {
-    content: '🎓';
-    font-size: 1.5rem;
+  content: '🎓';
+  font-size: 1.3rem;
 }
 
 .emptyState {
-    text-align: center;
-    padding: 3rem;
-    color: #718096;
-    font-size: 1.1rem;
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--text-medium);
+  font-family: 'Crimson Text', serif;
+  font-size: 1.1rem;
 }
 
 .emptyState::before {
-    content: '📋';
-    display: block;
-    font-size: 4rem;
-    margin-bottom: 1rem;
-    opacity: 0.5;
+  content: '📋';
+  display: block;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
 }
 
+/* Leave Button */
 .leaveButton {
-    margin-top: 2rem;
-    padding: 1rem 2rem;
-    background: #e53e3e;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 1.05rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 14px rgba(229, 62, 62, 0.4);
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 1.1rem 2rem;
+  background: linear-gradient(135deg, #DC2626, #B91C1C);
+  color: white;
+  border: none;
+  border-radius: 14px;
+  font-family: 'Crimson Text', serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.3);
 }
 
 .leaveButton:hover {
-    background: #c53030;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(229, 62, 62, 0.5);
+  background: linear-gradient(135deg, #B91C1C, #991B1B);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(220, 38, 38, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .contentGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .studentsSection {
+    max-height: none;
+  }
 }
 
 @media (max-width: 768px) {
-    .classDashboard {
-        padding: 2rem 1.5rem;
-        margin: 1rem;
-    }
+  .classDashboard {
+    padding: 0 1rem 1.5rem;
+    margin: 1rem auto;
+  }
 
-    .classDashboard h2 {
-        font-size: 2rem;
-    }
+  .header {
+    padding: 2rem 1.5rem;
+  }
+
+  .header h2 {
+    font-size: 2rem;
+  }
+
+  .announcementsWrapper {
+    max-height: 500px;
+  }
+
+  .announcementsSection,
+  .studentsSection {
+    padding: 1.5rem;
+  }
+
+  .leaveButton {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .header h2 {
+    font-size: 1.75rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .doctorInfo {
+    font-size: 1rem;
+    padding: 0.875rem 1.25rem;
+  }
+
+  .sectionHeader h3 {
+    font-size: 1.4rem;
+  }
 }

@@ -42,9 +42,7 @@ const ClassDetail = () => {
   };
 
   async function handleStudentDelete(student_id) {
-    if (!window.confirm('Are you sure you want to remove this student?')) {
-      return;
-    }
+
     try {
       await studentClassService.removeStudentFromClass(id, student_id);
       getClass();
@@ -56,7 +54,6 @@ const ClassDetail = () => {
 
   const handleAnnouncementSuccess = () => {
     setShowCreateAnnouncement(false);
-    // Trigger announcement list refresh
     setAnnouncementRefresh(prev => prev + 1);
   };
 
@@ -71,50 +68,58 @@ const ClassDetail = () => {
   
   return (
     <main className={styles.classDetail}>
-      <h2>{cls.name}</h2>
-      <div className={styles.doctorInfo}>
-        Doctor: {cls.doctor?.name}
+      <div className={styles.header}>
+        <h2>{cls.name}</h2>
+        <div className={styles.doctorInfo}>
+          Doctor: {cls.doctor?.name}
+        </div>
       </div>
 
-      {/* Announcements Section */}
-      <section className={styles.announcementsSection}>
-        <div className={styles.sectionHeader}>
-          <h3>Class Announcements</h3>
-          <button
-            onClick={() => setShowCreateAnnouncement(true)}
-            className={styles.createAnnouncementButton}
-          >
-            + New Announcement
-          </button>
-        </div>
-        <AnnouncementList 
-          classId={id} 
-          canDelete={true} 
-          refresh={announcementRefresh}
-        />
-      </section>
+      <div className={styles.contentGrid}>
+        {/* Left Column - Announcements */}
+        <section className={styles.announcementsSection}>
+          <div className={styles.sectionHeader}>
+            <h3>Announcements</h3>
+            <button
+              onClick={() => setShowCreateAnnouncement(true)}
+              className={styles.createAnnouncementButton}
+            >
+              + New
+            </button>
+          </div>
+          <div className={styles.announcementsWrapper}>
+            <AnnouncementList 
+              classId={id} 
+              canDelete={true} 
+              refresh={announcementRefresh}
+            />
+          </div>
+        </section>
 
-      {/* Students Section */}
-      <section className={styles.section}>
-        <h3>Students</h3>
-        {!cls.enrollments || cls.enrollments.length === 0 ? (
-          <div className={styles.emptyState}>No students enrolled yet</div>
-        ) : (
-          <ul className={styles.studentList}>
-            {cls.enrollments.map(en => (
-              <li key={en.id} className={styles.studentItem}>
-                <span className={styles.studentName}>{en.student?.name}</span>
-                <button 
-                  onClick={() => handleStudentDelete(en.student.id)}
-                  className={styles.removeButton}
-                >
-                  Remove
-                </button>
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
+        {/* Right Column - Students */}
+        <section className={styles.studentsSection}>
+          <div className={styles.sectionHeader}>
+            <h3>Students</h3>
+          </div>
+          {!cls.enrollments || cls.enrollments.length === 0 ? (
+            <div className={styles.emptyState}>No students enrolled yet</div>
+          ) : (
+            <ul className={styles.studentList}>
+              {cls.enrollments.map(en => (
+                <li key={en.id} className={styles.studentItem}>
+                  <span className={styles.studentName}>{en.student?.name}</span>
+                  <button 
+                    onClick={() => handleStudentDelete(en.student.id)}
+                    className={styles.removeButton}
+                  >
+                    Remove
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+      </div>
 
       {/* Actions */}
       <div className={styles.actions}>
