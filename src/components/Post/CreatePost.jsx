@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import * as postService from '../../services/postService';
 import styles from './CreatePost.module.css';
+import { UserContext } from '../../contexts/UserContext';
 
 const CreatePost = () => {
   const navigate = useNavigate();
+  const { user } = useContext(UserContext);
   const [formState, setFormState] = useState({ 
     title: '', 
     description: '', 
@@ -29,6 +31,12 @@ const CreatePost = () => {
     const { name, value } = e.target;
     setFormState({ ...formState, [name]: value });
   };
+
+  useEffect(() => {
+    if (!user || user.role !== 'institution') {
+      navigate('/');
+    }
+  }, [user, navigate]);
 
   return (
     <main className={styles.createPostContainer}>

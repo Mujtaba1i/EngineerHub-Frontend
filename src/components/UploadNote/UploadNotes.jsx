@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { UserContext } from '../../contexts/UserContext';
 import * as noteService from '../../services/noteService';
@@ -22,10 +22,12 @@ const UploadNote = () => {
   const [error, setError] = useState('');
 
   // Redirect if not authorized
-  if (!user || (user.role !== 'student' && user.role !== 'graduate')) {
-    navigate('/');
-    return null;
-  }
+  useEffect(()=>{
+    if (!user || (user.role !== 'student' && user.role !== 'graduate')) {
+      navigate('/');
+    }
+  }, [user, navigate])
+
 
   const handleChange = (e) => {
     setError('');

@@ -1,12 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import * as postService from '../../services/postService';
 import styles from './UpdatePost.module.css';
+import { UserContext } from '../../contexts/UserContext';
 
 const UpdatePost = () => {
   const navigate = useNavigate();
   const [formState, setFormState] = useState(null);
   const { id } = useParams();
+  const { user } = useContext(UserContext);
   
   useEffect(() => {
     getData();
@@ -40,6 +42,14 @@ const UpdatePost = () => {
     const { name, value } = e.target;
     setFormState({ ...formState, [name]: value });
   };
+
+  useEffect(() => {
+    if ((!user || user?.role !== 'institution') && formState?.institute_id !== parseInt(user.sub)) {
+      navigate('/');
+    }
+  }, [user, navigate]);
+
+
 
   if (!formState) return <div className={styles.loading}>Loading...</div>;
 

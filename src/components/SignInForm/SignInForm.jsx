@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router';
 import { signIn } from '../../services/authService';
 import { UserContext } from '../../contexts/UserContext';
@@ -28,6 +28,13 @@ const SignInForm = () => {
       setMessage(err.message);
     }
   };
+
+  const { user } = useContext(UserContext);
+  useEffect(() => {
+    if (!!user) {
+      navigate('/');
+    }
+  }, [user, navigate]);
 
   return (
     <main className={styles.signInContainer}>

@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router';
 import * as authService from '../../services/authService';
 import { UserContext } from '../../contexts/UserContext';
@@ -75,7 +75,14 @@ const SignUpForm = () => {
   function handleOptionSelection(evt) {
     setRole(evt.target.value);
   }
-
+  
+  const { user } = useContext(UserContext);
+  if(!!user) {
+    useEffect(() => {
+      navigate('/')
+    }, [])
+  }
+    
   return (
     <main className={styles.signUpContainer}>
       <h1>Sign Up</h1>

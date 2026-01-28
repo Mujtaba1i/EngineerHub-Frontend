@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { UserContext } from '../../contexts/UserContext';
 import { useNavigate, useParams } from 'react-router';
 import * as classService from '../../services/classService';
 import styles from './UpdateClass.module.css';
@@ -7,6 +8,7 @@ const UpdatClass = () => {
   const navigate = useNavigate();
   const [formState, setFormState] = useState(null);
   const { id } = useParams();
+  const { user } = useContext(UserContext);
   
   useEffect(() => {
     getdata();
@@ -29,8 +31,18 @@ const UpdatClass = () => {
     setFormState({ ...formState, name: e.target.value });
   };
 
-  if (!formState) return <div className={styles.loading}>Loading...</div>;
+    const userRole = user?.role;
+    if(userRole !== 'doctor') {
+      useEffect(() => {
+        navigate('/')
+      }, [])
+    }
 
+  if (!formState) return <div className={styles.loading}>Loading...</div>;
+  
+  if (Number(user.sub) !== formState.doctor_id) {
+      navigate('/');
+    }
   return (
     <main className={styles.updateClassContainer}>
       <h1>Update Class</h1>

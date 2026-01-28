@@ -1,13 +1,15 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router'
 import { getOne, update } from '../../services/projectService'
 import styles from './AddProject.module.css'
+import { UserContext } from '../../contexts/UserContext'
 
 function EditProject() {
     const { id } = useParams()
     const navigate = useNavigate()
-    const [form, setForm] = useState({})
-
+    const [form, setForm] = useState(null)
+    const { user } = useContext(UserContext);
+    
     useEffect(() => {
         getOne(id).then(data => setForm(data))
     }, [id])
@@ -22,7 +24,21 @@ function EditProject() {
         navigate(`/projects/${id}`)
     }
 
-    if (!form.title) return <div className={styles.loading}>Loading...</div>
+    useEffect(() => {
+        if (!form || !user) return 
+
+        if (user.role !== 'student' && user.role !== 'graduate') {
+            navigate('/')
+            return
+        }
+        if (parseInt(user.sub) !== form.user_id) {
+            navigate('/')
+        }
+    }, [form, user, navigate])
+
+    if (!form?.title) return <div className={styles.loading}>Loading...</div>
+    
+
 
     return (
         <main className={styles.container}>

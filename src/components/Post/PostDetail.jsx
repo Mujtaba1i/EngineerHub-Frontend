@@ -19,14 +19,8 @@ const PostDetail = () => {
     }
   };
 
-  useEffect(() => {
-    getPost();
-  }, [id]);
-
   const handleDelete = async () => {
-    if (!window.confirm('Are you sure you want to delete this post?')) {
-      return;
-    }
+
     try {
       await postService.remove(id);
       navigate('/posts');
@@ -36,29 +30,33 @@ const PostDetail = () => {
     }
   };
 
+  useEffect(() => {
+    if (!user || (user.role !== 'institution' && user.role !== 'student' && user.role !== 'graduate')) navigate('/');
+  }, [user, navigate]);
+
+  useEffect(() => {
+    getPost();
+  }, [id]);
   if (!post) return <div className={styles.loading}>Loading...</div>;
+
   
-  // تحديد إذا المستخدم هو صاحب الـ post
   const isOwner = user?.role === 'institution' && parseInt(user?.sub) === post.institute_id;
   
   return (
     <main className={styles.postDetail}>
       <h2>{post.title}</h2>
       
-      {/* عرض الصورة إذا موجودة */}
       {post.image_url && (
         <div className={styles.imageContainer}>
           <img src={post.image_url} alt={post.title} className={styles.postImage} />
         </div>
       )}
 
-      {/* عرض الوصف */}
       <section className={styles.section}>
         <h3>Description</h3>
         <p className={styles.description}>{post.description}</p>
       </section>
 
-      {/* أزرار التعديل والحذف - فقط لصاحب الـ post */}
       {isOwner && (
         <div className={styles.actions}>
           <Link to={`/posts/${id}/edit`} className={`${styles.actionLink} ${styles.editLink}`}>

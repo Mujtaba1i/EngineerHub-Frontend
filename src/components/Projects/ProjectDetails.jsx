@@ -15,9 +15,7 @@ function ProjectDetails() {
     }, [id])
 
     const handleDelete = async () => {
-        if (!window.confirm('Are you sure you want to delete this project?')) {
-            return
-        }
+
         await remove(id)
         navigate('/projects')
     }
@@ -78,7 +76,7 @@ function ProjectDetails() {
 
             {isOwner && (
                 <div className={styles.actions}>
-                    <button onClick={() => navigate(`/projects/edit/${id}`)} className={styles.editButton}>
+                    <button onClick={() => navigate(`/projects/${id}/edit`)} className={styles.editButton}>
                         Edit Project
                     </button>
                     <button onClick={handleDelete} className={styles.deleteButton}>
