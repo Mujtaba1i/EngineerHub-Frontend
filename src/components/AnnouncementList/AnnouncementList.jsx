@@ -34,9 +34,6 @@ const AnnouncementList = ({ classId, canDelete = false, refresh = 0 }) => {
   }, [classId, refresh]);
 
   const handleDelete = async (announcementId) => {
-    if (!window.confirm('Are you sure you want to delete this announcement?')) {
-      return;
-    }
 
     try {
       await announcementService.deleteAnnouncement(announcementId);
