@@ -38,38 +38,37 @@ const PostDetail = () => {
 
   if (!post) return <div className={styles.loading}>Loading...</div>;
   
-
-  if (!(user?.role === 'institution' && parseInt(user?.sub) === post.institute_id)) {
-    navigate('/');
-    return null;
-  }
+  // تحديد إذا المستخدم هو صاحب الـ post
+  const isOwner = user?.role === 'institution' && parseInt(user?.sub) === post.institute_id;
   
   return (
     <main className={styles.postDetail}>
       <h2>{post.title}</h2>
       
-   
+      {/* عرض الصورة إذا موجودة */}
       {post.image_url && (
         <div className={styles.imageContainer}>
           <img src={post.image_url} alt={post.title} className={styles.postImage} />
         </div>
       )}
 
-   
+      {/* عرض الوصف */}
       <section className={styles.section}>
         <h3>Description</h3>
         <p className={styles.description}>{post.description}</p>
       </section>
 
-
-      <div className={styles.actions}>
-        <Link to={`/posts/${id}/edit`} className={`${styles.actionLink} ${styles.editLink}`}>
-          Edit Post
-        </Link>
-        <button onClick={handleDelete} className={styles.deleteButton}>
-          Delete Post
-        </button>
-      </div>
+      {/* أزرار التعديل والحذف - فقط لصاحب الـ post */}
+      {isOwner && (
+        <div className={styles.actions}>
+          <Link to={`/posts/${id}/edit`} className={`${styles.actionLink} ${styles.editLink}`}>
+            Edit Post
+          </Link>
+          <button onClick={handleDelete} className={styles.deleteButton}>
+            Delete Post
+          </button>
+        </div>
+      )}
     </main>
   );
 };

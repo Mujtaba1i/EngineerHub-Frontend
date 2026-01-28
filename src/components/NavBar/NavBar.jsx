@@ -23,6 +23,8 @@ const NavBar = () => {
   };
 
   const canAccessNotes = user && (user.role === 'student' || user.role === 'graduate');
+  const isInstitution = user && user.role === 'institution';
+  const canAccessPosts = user; // كل المستخدمين يقدرون يشوفون Posts
 
   return (
     <header className={styles.navbar}>
@@ -52,6 +54,13 @@ const NavBar = () => {
               <li><Link to='/' onClick={closeMenu}>Dashboard</Link></li>
               {canAccessNotes && (
                 <li><Link to='/notes' onClick={closeMenu}>Notes</Link></li>
+              )}
+              {canAccessPosts && (
+                <li>
+                  <Link to='/posts' onClick={closeMenu}>
+                    {isInstitution ? 'My Posts' : 'Posts'}
+                  </Link>
+                </li>
               )}
               <li><Link to='/projects' onClick={closeMenu}>Senior Projects</Link></li>
               <li>

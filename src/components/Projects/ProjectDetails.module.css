@@ -28,7 +28,7 @@
   --shadow-purple: 0 8px 30px rgba(112, 71, 162, 0.15);
 }
 
-.postDetail {
+.container {
   max-width: 1200px;
   margin: 2rem auto;
   padding: 0 2rem 2rem;
@@ -46,38 +46,7 @@
   }
 }
 
-.postDetail h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 3rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, var(--navy-900), var(--purple-700));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin: 0 0 2rem 0;
-  line-height: 1.2;
-}
-
-.imageContainer {
-  background: white;
-  border-radius: 20px;
-  padding: 2rem;
-  margin-bottom: 2rem;
-  box-shadow: var(--shadow-soft);
-  border: 2px solid var(--lavender-200);
-  overflow: hidden;
-}
-
-.postImage {
-  width: 100%;
-  height: auto;
-  max-height: 600px;
-  object-fit: cover;
-  border-radius: 16px;
-  box-shadow: var(--shadow-medium);
-}
-
-.section {
+.header {
   background: white;
   border-radius: 20px;
   padding: 2.5rem;
@@ -86,9 +55,42 @@
   border: 2px solid var(--lavender-200);
 }
 
-.section h3 {
+.header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--navy-900), var(--purple-700));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.contentGrid {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.mainContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.section {
+  background: white;
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: var(--shadow-soft);
+  border: 2px solid var(--lavender-200);
+}
+
+.section h4 {
   font-family: 'Crimson Text', serif;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: 700;
   background: linear-gradient(135deg, var(--navy-900), var(--purple-700));
   -webkit-background-clip: text;
@@ -100,20 +102,119 @@
   gap: 0.75rem;
 }
 
-.section h3::before {
-  content: '📄';
-  font-size: 1.6rem;
+.section h4::before {
+  font-size: 1.4rem;
   filter: none;
   -webkit-text-fill-color: initial;
 }
 
-.description {
+.summarySection h4::before {
+  content: '📄';
+}
+
+.contactSection h4::before {
+  content: '📞';
+}
+
+.section p {
   font-family: 'Crimson Text', serif;
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   line-height: 1.8;
   color: var(--text-dark);
-  white-space: pre-wrap;
-  word-wrap: break-word;
+  margin: 0 0 1rem 0;
+}
+
+.section p:last-child {
+  margin-bottom: 0;
+}
+
+.contactInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  background: linear-gradient(135deg, var(--lavender-100), var(--lavender-200));
+  border-radius: 12px;
+  border-left: 4px solid var(--purple-600);
+}
+
+.contactItem strong {
+  font-family: 'Crimson Text', serif;
+  color: var(--text-dark);
+  font-weight: 700;
+  min-width: 80px;
+}
+
+.contactItem span {
+  font-family: 'Crimson Text', serif;
+  color: var(--text-medium);
+  word-break: break-all;
+}
+
+.contactItem a {
+  font-family: 'Crimson Text', serif;
+  color: var(--purple-700);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  word-break: break-all;
+}
+
+.contactItem a:hover {
+  color: var(--purple-900);
+  text-decoration: underline;
+}
+
+.posterSection {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: var(--shadow-soft);
+  border: 2px solid var(--lavender-200);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  position: sticky;
+  top: 2rem;
+}
+
+.posterSection h4 {
+  font-family: 'Crimson Text', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--navy-900), var(--purple-700));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.posterSection h4::before {
+  content: '🖼️';
+  font-size: 1.3rem;
+  filter: none;
+  -webkit-text-fill-color: initial;
+}
+
+.posterImage {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: var(--shadow-medium);
+  transition: transform 0.3s ease;
+}
+
+.posterImage:hover {
+  transform: scale(1.02);
 }
 
 .actions {
@@ -127,38 +228,9 @@
   border: 2px solid var(--lavender-200);
 }
 
-.actionLink {
-  padding: 0.9rem 1.75rem;
-  background: linear-gradient(135deg, var(--navy-700), var(--purple-700));
-  color: white;
-  text-decoration: none;
-  border-radius: 12px;
-  font-family: 'Crimson Text', serif;
-  font-weight: 700;
-  font-size: 1.05rem;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: var(--shadow-purple);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.65rem;
-}
-
-.actionLink:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(112, 71, 162, 0.3);
-  background: linear-gradient(135deg, var(--navy-800), var(--purple-800));
-}
-
-.editLink::before {
-  content: '✏️';
-  font-size: 1.1rem;
-}
-
+.editButton,
 .deleteButton {
   padding: 0.9rem 1.75rem;
-  background: linear-gradient(135deg, #DC2626, #B91C1C);
-  color: white;
   border: none;
   border-radius: 12px;
   font-family: 'Crimson Text', serif;
@@ -166,10 +238,32 @@
   font-size: 1.05rem;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.3);
   display: inline-flex;
   align-items: center;
   gap: 0.65rem;
+}
+
+.editButton {
+  background: linear-gradient(135deg, var(--navy-700), var(--purple-700));
+  color: white;
+  box-shadow: var(--shadow-purple);
+}
+
+.editButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(112, 71, 162, 0.3);
+  background: linear-gradient(135deg, var(--navy-800), var(--purple-800));
+}
+
+.editButton::before {
+  content: '✏️';
+  font-size: 1.1rem;
+}
+
+.deleteButton {
+  background: linear-gradient(135deg, #DC2626, #B91C1C);
+  color: white;
+  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.3);
 }
 
 .deleteButton:hover {
@@ -195,34 +289,36 @@
   font-weight: 700;
 }
 
+@media (max-width: 1024px) {
+  .contentGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .posterSection {
+    position: static;
+  }
+}
+
 @media (max-width: 768px) {
-  .postDetail {
+  .container {
     padding: 0 1rem 1.5rem;
     margin: 1rem auto;
   }
 
-  .postDetail h2 {
+  .header {
+    padding: 2rem 1.5rem;
+  }
+
+  .header h1 {
     font-size: 2.2rem;
-  }
-
-  .imageContainer {
-    padding: 1.5rem;
-  }
-
-  .postImage {
-    max-height: 400px;
   }
 
   .section {
     padding: 2rem 1.5rem;
   }
 
-  .section h3 {
-    font-size: 1.5rem;
-  }
-
-  .description {
-    font-size: 1.05rem;
+  .section h4 {
+    font-size: 1.4rem;
   }
 
   .actions {
@@ -230,7 +326,7 @@
     padding: 1.5rem;
   }
 
-  .actionLink,
+  .editButton,
   .deleteButton {
     width: 100%;
     justify-content: center;
@@ -238,19 +334,20 @@
 }
 
 @media (max-width: 480px) {
-  .postDetail h2 {
+  .header h1 {
     font-size: 1.8rem;
   }
 
-  .section h3 {
-    font-size: 1.3rem;
+  .section h4 {
+    font-size: 1.25rem;
   }
 
-  .imageContainer {
-    padding: 1rem;
+  .contactItem {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  .section {
-    padding: 1.5rem;
+  .contactItem strong {
+    min-width: auto;
   }
 }
